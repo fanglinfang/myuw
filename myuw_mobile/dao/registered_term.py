@@ -6,7 +6,9 @@ This module encapsulates the access of the term data
 import logging
 from myuw_mobile.dao.term import is_a_term, is_b_term, is_full_summer_term
 from myuw_mobile.dao.term import get_current_summer_term, get_comparison_date
+from myuw_mobile.dao.term import get_current_quarter
 from myuw_mobile.dao.schedule import get_next_quarter_schedule
+from myuw_mobile.dao.schedule import get_current_quarter_schedule
 from myuw_mobile.dao.schedule import get_next_autumn_quarter_schedule
 from myuw_mobile.dao.schedule import has_summer_quarter_section
 from myuw_mobile.dao import get_user_model
@@ -49,15 +51,26 @@ def get_registered_future_quarters(request):
     Return the list of future quarters that
     has actively enrolled sections
     """
-    next_quar_sche = get_next_quarter_schedule(request)
-    next_autumn_sche = None
-    if next_quar_sche and next_quar_sche.term.quarter == 'summer':
+    current_term = get_current_quarter(request)
+
+    # MUWM-2508
+    if current_term.quarter == "summer":
+        next_quar_sche = get_current_quarter_schedule(request)
         next_autumn_sche = get_next_autumn_quarter_schedule(request)
-    return _get_registered_future_quarters(next_quar_sche,
-                                           next_autumn_sche)
+
+    else:
+        next_quar_sche = get_next_quarter_schedule(request)
+        next_autumn_sche = None
+        if next_quar_sche and next_quar_sche.term.quarter == 'summer':
+            next_autumn_sche = get_next_autumn_quarter_schedule(request)
+
+    terms = _get_registered_future_quarters(get_comparison_date(request),
+                                            next_quar_sche, next_autumn_sche)
+
+    return terms
 
 
-def _get_registered_future_quarters(next_quar_sche,
+def _get_registered_future_quarters(date, next_quar_sche,
                                     next_autumn_sche):
     """
     Return the list of future quarters that
@@ -74,22 +87,28 @@ def _get_registered_future_quarters(next_quar_sche,
         if next_quarter.quarter == "summer":
             sumr_tms = _get_registered_summer_terms(next_quar_sche.sections)
 
-            if sumr_tms[A_TERM] or sumr_tms[FULL_TERM] and sumr_tms[B_TERM]:
-                terms.append(_get_future_term_json(next_quarter,
-                                                   "a-term",
-                                                   sumr_tms))
+            # Filter summer terms based on MUWM-2508
+            if next_quarter.first_day_quarter > date:
+                if sumr_tms[A_TERM] or sumr_tms[FULL_TERM] and sumr_tms[B_TERM]:
+                    terms.append(_get_future_term_json(next_quarter,
+                                                       "a-term",
+                                                       sumr_tms))
 
-            if sumr_tms[B_TERM] or sumr_tms[FULL_TERM] and sumr_tms[A_TERM]:
-                terms.append(_get_future_term_json(next_quarter,
-                                                   "b-term",
-                                                   sumr_tms))
+                if (sumr_tms[FULL_TERM] and
+                        not sumr_tms[A_TERM] and
+                        not sumr_tms[B_TERM]):
 
-            if (sumr_tms[FULL_TERM] and
-                    not sumr_tms[A_TERM] and
-                    not sumr_tms[B_TERM]):
-                terms.append(_get_future_term_json(next_quarter,
-                                                   "full-term",
-                                                   sumr_tms))
+                    terms.append(_get_future_term_json(next_quarter,
+                                                       "full-term",
+                                                       sumr_tms))
+
+
+            if next_quarter.bterm_first_date > date:
+                if sumr_tms[B_TERM] or sumr_tms[FULL_TERM] and sumr_tms[A_TERM]:
+                    terms.append(_get_future_term_json(next_quarter,
+                                                       "b-term",
+                                                       sumr_tms))
+
         else:
             terms.append(_get_future_term_json(next_quarter, ""))
 

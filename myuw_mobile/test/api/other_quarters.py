@@ -45,3 +45,36 @@ class TestOtherQuarters(TestCase):
         self.assertEquals(data["terms"][0]['quarter'], 'Summer')
         self.assertEquals(data["terms"][0]['credits'], '2.0')
         self.assertEquals(data["terms"][0]['last_final_exam_date'], '2013-08-23 23:59:59')
+
+    @skipIf(missing_url("myuw_home"), "myuw urls not configured")
+    def test_javerage_b_term(self):
+        url = reverse("myuw_other_quarters_api")
+        get_user('javerage')
+        self.client.login(username='javerage', password=get_user_pass('javerage'))
+        session = self.client.session
+        session["myuw_override_date"] = "2013-07-24"
+        session.save()
+
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+        data = json.loads(response.content)
+        self.assertEquals(data["next_term_data"]["has_registration"], True)
+        self.assertEquals(data["next_term_data"]["quarter"], "Autumn")
+        self.assertEquals(data["next_term_data"]["year"], 2013)
+
+        self.assertEquals(len(data["terms"]), 2)
+
+        session["myuw_override_date"] = "2013-07-25"
+        session.save()
+
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+        data = json.loads(response.content)
+        self.assertEquals(data["next_term_data"]["has_registration"], True)
+        self.assertEquals(data["next_term_data"]["quarter"], "Autumn")
+        self.assertEquals(data["next_term_data"]["year"], 2013)
+
+        self.assertEquals(len(data["terms"]), 1)
+
