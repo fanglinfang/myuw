@@ -85,29 +85,28 @@ def _get_registered_future_quarters(date, next_quar_sche,
         next_quarter = next_quar_sche.term
 
         if next_quarter.quarter == "summer":
-            sumr_tms = _get_registered_summer_terms(next_quar_sche.sections)
+            sumr = _get_registered_summer_terms(next_quar_sche.sections)
 
             # Filter summer terms based on MUWM-2508
             if next_quarter.first_day_quarter > date:
-                if sumr_tms[A_TERM] or sumr_tms[FULL_TERM] and sumr_tms[B_TERM]:
+                if sumr[A_TERM] or sumr[FULL_TERM] and sumr[B_TERM]:
                     terms.append(_get_future_term_json(next_quarter,
                                                        "a-term",
-                                                       sumr_tms))
+                                                       sumr))
 
-                if (sumr_tms[FULL_TERM] and
-                        not sumr_tms[A_TERM] and
-                        not sumr_tms[B_TERM]):
+                if (sumr[FULL_TERM] and
+                        not sumr[A_TERM] and
+                        not sumr[B_TERM]):
 
                     terms.append(_get_future_term_json(next_quarter,
                                                        "full-term",
-                                                       sumr_tms))
-
+                                                       sumr))
 
             if next_quarter.bterm_first_date > date:
-                if sumr_tms[B_TERM] or sumr_tms[FULL_TERM] and sumr_tms[A_TERM]:
+                if sumr[B_TERM] or sumr[FULL_TERM] and sumr[A_TERM]:
                     terms.append(_get_future_term_json(next_quarter,
                                                        "b-term",
-                                                       sumr_tms))
+                                                       sumr))
 
         else:
             terms.append(_get_future_term_json(next_quarter, ""))
