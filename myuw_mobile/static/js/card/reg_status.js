@@ -97,10 +97,12 @@ var RegStatusCard = {
 
         var all_plans = WSData.myplan_data();
         var plan_data = null;
-        for (i = 0; i < all_plans.terms.length; i++) {
-            var plan_term = all_plans.terms[i];
-            if (plan_term.quarter == quarter) {
-                plan_data = plan_term.courses;
+        if (all_plans.terms) {
+            for (i = 0; i < all_plans.terms.length; i++) {
+                var plan_term = all_plans.terms[i];
+                if (plan_term.quarter == quarter) {
+                    plan_data = plan_term.courses;
+                }
             }
         }
         //Get hold count from notice attrs
