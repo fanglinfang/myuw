@@ -45,17 +45,28 @@ var RegStatusCard = {
         var display_reg_dates = [];
         for (i = 0; i < reg_date.length; i++) {
             var notice = reg_date[i];
+            var show_notice = false;
+            var registration_date = null;
             for (j = 0; j < notice.attributes.length; j++) {
                 var attribute = notice.attributes[j];
+                // Extract the registration date:
+                if (attribute.name == "Date") {
+                    registration_date = attribute.value;
+                }
+
                 if (quarter == "Summer") {
                     if ((attribute.name == "Quarter") && (attribute.value == "Summer")) {
-                        display_reg_dates.push(notice);
+                        show_notice = true;
                     }
                 }
                 else {
                     if ((attribute.name == "Quarter") && (attribute.value != "Summer")) {
-                        display_reg_dates.push(notice);
+                        show_notice = true;
                     }
+                }
+
+                if (show_notice) {
+                    display_reg_dates.push({ "notice": notice, "date": registration_date });
                 }
             }
         }
