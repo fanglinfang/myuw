@@ -96,7 +96,7 @@ var RegStatusCard = {
 
         var all_plan_data = WSData.myplan_data(year, quarter);
         var plan_data = {};
-        if (all_plan_data.terms) {
+        if (all_plan_data && all_plan_data.terms) {
             plan_data = all_plan_data.terms[0];
         }
 
@@ -118,27 +118,33 @@ var RegStatusCard = {
 
     _add_events: function(card) {
         // show registration resources
-        var id, holds_class;
+        var id, holds_class, unready_courses;
         if (card) {
             id = "#show_reg_resources_"+card;
             holds_class = ".reg_disclosure_"+card;
+            unready_courses = "#show_unready_courses_"+card;
         }
         else {
             id = "#show_reg_resources";
             holds_class = ".reg_disclosure";
+            unready_courses = "#show_unready_courses";
         }
 
         // Prevent a closure on card
         (function(label) {
             $('body').on('click', id, function (ev) {
-                var div, expose;
+                var div, expose, show_expose, hide_expose;
                 if (label) {
                     div = $("#reg_resources_"+label);
                     expose = $("#show_reg_resources_"+label);
+                    show_expose = $("#show_reg_label_"+label).html();
+                    hide_expose = $("#hide_reg_label_"+label).html();
                 }
                 else {
                     div = $("#reg_resources");
                     expose = $("#show_reg_resources");
+                    show_expose = $("#show_reg_label").html();
+                    hide_expose = $("#hide_reg_label").html();
                 }
 
                 ev.preventDefault();
@@ -147,7 +153,7 @@ var RegStatusCard = {
                 div.toggleClass("slide-show");
 
                 if (div.hasClass("slide-show")) {
-                    expose.text("Show less");
+                    expose.text(hide_expose);
                     div.attr('aria-hidden', 'false');
                     expose.attr('title', 'Collapse to hide additional registration resources');
                     window.myuw_log.log_card(card, "expand");
@@ -157,10 +163,44 @@ var RegStatusCard = {
                     window.myuw_log.log_card(card, "collapse");
 
                     setTimeout(function() {
-                        expose.text("Show more");
+                        expose.text(show_expose);
                     }, 700);
                 }
             });
+
+            // show myplan unready course details
+            $('body').on('click', unready_courses, function (ev) {
+                ev.preventDefault();
+                var div, expose;
+                if (label) {
+                    div = $("#myplan_unready_courses_"+label);
+                    expose = $("#show_unready_courses_"+label);
+                }
+                else {
+                    div = $("#myplan_unready_courses");
+                    expose = $("#show_unready_courses");
+                }
+
+                ev.preventDefault();
+                var card = $(ev.target).closest("[data-type='card']");
+
+                div.toggleClass("slide-show");
+
+                if (div.hasClass("slide-show")) {
+                    expose.text("Hide details");
+                    div.attr('aria-hidden', 'false');
+                    // expose.attr('title', '');
+                } else {
+                    div.attr('aria-hidden', 'true');
+                    // expose.attr('title', '');
+
+                    setTimeout(function() {
+                        expose.text("See details");
+                    }, 700);
+                }
+
+            });
+
 
             // show hold details
             $('body').on('click', holds_class, function (ev) {

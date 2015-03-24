@@ -23,14 +23,19 @@ class MyPlan(RESTDispatch):
                             terms=1)
 
             base_json = plan.json_data()
+            has_ready_courses = False
+            has_unready_courses = False
+            ready_count = 0
+            unready_count = 0
 
             for course in base_json["terms"][0]["courses"]:
                 if course["registrations_available"]:
+                    has_ready_courses = True
+                    ready_count = ready_count + 1
                     for section in course["sections"]:
                         curriculum = course["curriculum_abbr"].upper()
                         section_id = section["section_id"].upper()
-                        label = "%s,%s,%s,%s/%s" % (
-                                                    year,
+                        label = "%s,%s,%s,%s/%s" % (year,
                                                     quarter.lower(),
                                                     curriculum,
                                                     course["course_number"],
@@ -39,6 +44,14 @@ class MyPlan(RESTDispatch):
 
                         sws_section = get_section_by_label(label)
                         section["section_data"] = sws_section.json_data()
+                else:
+                    has_unready_courses = True
+                    unready_count = unready_count + 1
+
+            base_json["terms"][0]["has_ready_courses"] = has_ready_courses
+            base_json["terms"][0]["has_unready_courses"] = has_unready_courses
+            base_json["terms"][0]["ready_count"] = ready_count
+            base_json["terms"][0]["unready_count"] = unready_count
             return HttpResponse(json.dumps(base_json))
         except Exception as ex:
             # Log the error, but don't have the front end complain

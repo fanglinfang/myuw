@@ -37,6 +37,21 @@
                     {{ /each }}
                 </p>
             </div>     
+            {{ #if plan_data.courses }}
+            In MyPlan   {{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready<br/>
+            {{ plan_data.unready_count }} not ready <a href="javascript:void(0)" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
+            <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide">
+            Courses not ready<br/>
+            {{ #each plan_data.courses }}
+                {{ #unless registrations_available }}
+                {{ curriculum_abbr }} {{ course_number }} {{ #unless @last }},{{/unless}}
+                {{ /unless }}
+            {{ /each}}
+
+            <br />
+            One of more of the issues below...
+            </div>
+            {{ /if }}
             <h4 class="sr-only">Registration Resources</h4>
 			<div class="pull-right">
 	            <ul class="reg-resources-list">
@@ -50,6 +65,7 @@
 	                {{ #if is_seattle }}
 	                    <li><a href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
 	                {{ /if }}
+	                    <li><a href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
 	            </ul>
 			</div>			
 			
@@ -66,26 +82,79 @@
                   {{ /each }}
                 </ul>
                 {{/if}} -->
+                <!-- data from MyPlan -->
+                <div>
+                    {{ #if plan_data.has_ready_courses }}
+                    <div>
+                    Ready for registration
+                    <br/>
+                    {{ #each plan_data.courses }}
+                    {{ #if registrations_available }}
+                        {{ curriculum_abbr }} {{ course_number }}
+                        <br/>
+                        {{ #each sections }}
+                        {{ section_id }}
+                        {{#each section_data.meetings}}
+                            {{#if days_tbd }}
+                            Days and times to be arranged<br/>
+                            {{else}}
+                                {{#if meeting_days.monday}}<abbr title="Monday">M</abbr>{{/if}}{{#if
+                                meeting_days.tuesday}}<abbr title="Tuesday">T</abbr>{{/if}}{{#if
+                                meeting_days.wednesday}}<abbr title="Wednesday">W</abbr>{{/if}}{{#if
+                                meeting_days.thursday}}<abbr title="Thursday">Th</abbr>{{/if}}{{#if
+                                meeting_days.friday}}<abbr title="Friday">F</abbr>{{/if}}{{#if
+                                meeting_days.saturday}}<abbr title="Saturday">Sa</abbr>{{/if}}{{#if
+                                meeting_days.sunday}}<abbr title="Sunday">Su</abbr>{{/if}}
+                            {{formatTime start_time}} - {{formatTimeAMPM end_time}}<br />
+                            {{/if}}
+                        {{/each}}
+
+                        {{ /each }}
+                        {{/if}}
+                    {{ /each }}
+                    </div>
+                    {{ /if }}
+
+                    {{ #if plan_data.has_unready_courses }}
+                    <div>
+                    Not ready for registration
+                    <br />
+                    {{ #each plan_data.courses }}
+                        {{ #unless registrations_available }}
+                        {{ curriculum_abbr }} {{ course_number }} <br />
+                        {{ /unless }}
+                    {{ /each}}
+                    </div>
+                    {{ /if }}
+                </div>
+
                 <h4>Resources</h4>
+                {{ #if plan_data.courses }}
+                <ul class="reg-resources-list">
+                    <li><a href="https://myplan.uw.edu">Edit Plan in MyPlan</a> (Academic Planning)</li>
+                    <li><a href="https://uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Degree Audit Reporting System (DARS)</a></li>
+                </ul>
+
+                {{ else }}
                 <ul class="reg-resources-list">
 					<li><a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a></li>
                     <li><a href="https://myplan.uw.edu">MyPlan</a> (Academic Planning)</li>
                     <li><a href="https://uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Degree Audit Reporting System (DARS)</a></li>
                 </ul>
-                <!-- data from MyPlan -->
-                <div>
-                    {{ #each plan_data.courses }}
-                    {{ curriculum_abbr }} {{ course_number }} - {{ #if registrations_available }} Available{{/if}}
-                    <br/>
-                    {{ #each sections }}
-                    Section {{ section_id }}<br />
-                    {{ /each }}
-                    {{ /each }}
-                </div>
+                {{ /if }}
+
             </div>
             
             <div class="card-disclosure">
+                {{ #if plan_data.courses }}
+                <span id="show_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show {{reg_next_quarter}} {{ reg_next_year }} plan</span>
+                <span id="hide_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Hide {{reg_next_quarter}} {{ reg_next_year }} plan</span>
+                <a id="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" href="#" title="Expand to show additional registration resources">Show {{reg_next_quarter}} {{ reg_next_year }} plan</a>
+                {{ else }}
+                <span id="show_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show more</span>
+                <span id="hide_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show less</span>
                 <a id="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" href="#" title="Expand to show additional registration resources">Show more</a>
+                {{ /if }}
             </div>
         
         </div>
