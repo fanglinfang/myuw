@@ -4,7 +4,6 @@ var SummerRegStatusCard = {
 
     render_init: function() {
         if (window.card_display_dates.is_after_start_of_summer_reg_display_period1 || window.card_display_dates.is_after_start_of_summer_reg_display_periodA) {
-            WSData.fetch_myplan_data(RegStatusCard.render_upon_data, RegStatusCard.render_error);
             WSData.fetch_notice_data(SummerRegStatusCard.render_upon_data, SummerRegStatusCard.render_error);
             WSData.fetch_oquarter_data(SummerRegStatusCard.render_upon_data, SummerRegStatusCard.render_error);
         }
@@ -34,24 +33,31 @@ var SummerRegStatusCard = {
     },
 
     _render: function() {
-        var content;
-        if (window.card_display_dates.is_after_start_of_summer_reg_display_periodA) {
-            content = RegStatusCard._render_for_term('Summer', 'summerA');
-            if (!content) {
-                $("#SummerRegStatusCardA").hide();
+        var year = WSData.oquarter_data().next_term_data.year;
+
+        if (WSData.myplan_data(year, "Summer")) {
+            var content;
+            if (window.card_display_dates.is_after_start_of_summer_reg_display_periodA) {
+                content = RegStatusCard._render_for_term('Summer', 'summerA');
+                if (!content) {
+                    $("#SummerRegStatusCardA").hide();
+                }
+                $("#SummerRegStatusCardA").html(content);
+                RegStatusCard._add_events('summerA');
             }
-            $("#SummerRegStatusCardA").html(content);
-            RegStatusCard._add_events('summerA');
+            if (window.card_display_dates.is_after_start_of_summer_reg_display_period1) {
+                content = RegStatusCard._render_for_term('Summer', 'summer1');
+
+                if (!content) {
+                    $("#SummerRegStatusCard1").hide();
+                }
+                $("#SummerRegStatusCard1").html(content);
+
+                RegStatusCard._add_events('summer1');
+            }
         }
-        if (window.card_display_dates.is_after_start_of_summer_reg_display_period1) {
-            content = RegStatusCard._render_for_term('Summer', 'summer1');
-
-            if (!content) {
-                $("#SummerRegStatusCard1").hide();
-            }
-            $("#SummerRegStatusCard1").html(content);
-
-            RegStatusCard._add_events('summer1');
+        else {
+            WSData.fetch_myplan_data(year, "Summer", SummerRegStatusCard.render_upon_data,SummerRegStatusCard.render_error);
         }
     }
 };
