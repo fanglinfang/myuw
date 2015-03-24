@@ -5,13 +5,12 @@
         "MyPlanHref":"http://example.com/MyPlan",
         "Courses":[
             {
-                "CurriculumAbbreviation":"CSE",
-                "CourseNumber":"101",
+                "CurriculumAbbreviation":"PHYS",
+                "CourseNumber":"121",
                 "RegistrationAvailable":true,
                 "Sections":[
-                    {"SectionId":"A"},
                     {"SectionId":"AA"},
-                    {"SectionId":"AB"}
+                    {"SectionId":"AC"}
                 ]},
             {
                 "CurriculumAbbreviation":"CSE",
