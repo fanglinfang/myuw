@@ -65,7 +65,8 @@ urlpatterns = patterns(
         login_required(StudClasScheFutureQuar().run),
         name="myuw_future_schedule_api"
         ),
-    url(r'^api/v1/myplan/?$', login_required(MyPlan().run),
+    url(r'^api/v1/myplan/(?P<year>\d{4})/(?P<quarter>[a-zA-Z]+)',
+        login_required(MyPlan().run),
         name="myuw_myplan"),
     url(r'^api/v1/academic_events$', login_required(AcademicEvents().run),
         name="myuw_academic_calendar"),

@@ -7,7 +7,6 @@ var RegStatusCard = {
             window.card_display_dates.is_before_end_of_registration_display_period) {
             WSData.fetch_notice_data(RegStatusCard.render_upon_data,RegStatusCard.render_error);
             WSData.fetch_oquarter_data(RegStatusCard.render_upon_data, RegStatusCard.render_error);
-            WSData.fetch_myplan_data(RegStatusCard.render_upon_data, RegStatusCard.render_error);
         }
         else {
             $("#RegStatusCard").hide();
@@ -24,7 +23,7 @@ var RegStatusCard = {
     },
 
     _has_all_data: function () {
-        if (WSData.notice_data() && WSData.oquarter_data() && WSData.myplan_data()) {
+        if (WSData.notice_data() && WSData.oquarter_data()) {
             return true;
         }
         return false;
@@ -95,16 +94,12 @@ var RegStatusCard = {
             return;
         }
 
-        var all_plans = WSData.myplan_data();
-        var plan_data = null;
-        if (all_plans.terms) {
-            for (i = 0; i < all_plans.terms.length; i++) {
-                var plan_term = all_plans.terms[i];
-                if (plan_term.quarter == quarter) {
-                    plan_data = plan_term.courses;
-                }
-            }
+        var all_plan_data = WSData.myplan_data(year, quarter);
+        var plan_data = {};
+        if (all_plan_data.terms) {
+            plan_data = all_plan_data.terms[0];
         }
+
         //Get hold count from notice attrs
         var hold_count = reg_holds.length;
         return template({"reg_notices": reg_notices,
@@ -203,15 +198,21 @@ var RegStatusCard = {
     _render: function () {
         var next_term_data = WSData.oquarter_data().next_term_data;
         var reg_next_quarter = next_term_data.quarter;
-        content = RegStatusCard._render_for_term(reg_next_quarter);
 
-        if (!content) {
-            RegStatusCard.dom_target.hide();
-            return;
+        if (WSData.myplan_data(next_term_data.year, next_term_data.quarter)) {
+            content = RegStatusCard._render_for_term(reg_next_quarter);
+
+            if (!content) {
+                RegStatusCard.dom_target.hide();
+                return;
+            }
+
+            RegStatusCard._add_events();
+
+            RegStatusCard.dom_target.html(content);
         }
-
-        RegStatusCard._add_events();
-
-        RegStatusCard.dom_target.html(content);
+        else {
+            WSData.fetch_myplan_data(next_term_data.year, next_term_data.quarter, RegStatusCard.render_upon_data,RegStatusCard.render_error);
+        }
     }
 };

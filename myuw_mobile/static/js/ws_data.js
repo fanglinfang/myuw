@@ -19,7 +19,7 @@ WSData = {
     _callback_args: {},
     _academic_calendar_data: null,
     _current_academic_calendar_data: null,
-    _myplan_data: null,
+    _myplan_data: {},
 
     // MUWM-1894 - enqueue callbacks for multiple callers of urls.
     _is_running_url: function(url) {
@@ -171,8 +171,13 @@ WSData = {
         return WSData._current_academic_calendar_data;
     },
 
-    myplan_data: function() {
-        return WSData._myplan_data;
+    myplan_data: function(year, quarter) {
+        if (WSData._myplan_data[year]) {
+            if (WSData._myplan_data[year][quarter]) {
+                return WSData._myplan_data[year][quarter];
+            }
+        }
+        return null;
     },
 
     fetch_academic_calendar_events: function(callback, err_callback, args) {
@@ -666,9 +671,9 @@ WSData = {
         }
     },
 
-    fetch_myplan_data: function(callback, err_callback, args) {
-        if (WSData._myplan_data === null) {
-            var url = "/mobile/api/v1/myplan/";
+    fetch_myplan_data: function(year, quarter, callback, err_callback, args) {
+        if (WSData.myplan_data(year, quarter) === null) {
+            var url = "/mobile/api/v1/myplan/"+year+"/"+quarter;
 
             if (WSData._is_running_url(url)) {
                 WSData._enqueue_callbacks_for_url(url, callback, err_callback, args);
@@ -683,7 +688,10 @@ WSData = {
                     type: "GET",
                     accepts: {html: "text/html"},
                     success: function(results) {
-                        WSData._myplan_data = results;
+                        if (!WSData._myplan_data[year]) {
+                            WSData._myplan_data[year] = {};
+                        }
+                        WSData._myplan_data[year][quarter] = results;
                         WSData._run_success_callbacks_for_url(url);
                     },
                     error: function(xhr, status, error) {
