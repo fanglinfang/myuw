@@ -69,7 +69,7 @@ var RegStatusCard = {
 
                 if (show_notice) {
                     display_reg_dates.push({ "notice": notice, "date": registration_date });
-                    registration_is_open = true;
+                    registration_is_open = false;
                 }
             }
         }
