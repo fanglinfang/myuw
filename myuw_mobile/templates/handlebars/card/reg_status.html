@@ -39,7 +39,10 @@
             </div>     
             {{ #if plan_data.courses }}
             In MyPlan   {{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready<br/>
-            {{ plan_data.unready_count }} not ready <a href="javascript:void(0)" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
+            {{ plan_data.unready_count }} not ready
+            {{ #if plan_data.has_sections }}<a href="javascript:void(0)" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
+            {{ else }} <a href="">Add Sections</a>
+            {{ /if}}
             <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide">
             Courses not ready<br/>
             {{ #each plan_data.courses }}
