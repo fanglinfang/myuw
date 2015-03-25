@@ -41,6 +41,9 @@ var RegStatusCard = {
         var i, j;
 
         // Filter estimated registration dates for summer...
+        // Having this notice is being used a proxy for registration not being open yet.
+        // If the notice is gone, registration is open?
+        var registration_is_open = true;
         var display_reg_dates = [];
         for (i = 0; i < reg_date.length; i++) {
             var notice = reg_date[i];
@@ -66,6 +69,7 @@ var RegStatusCard = {
 
                 if (show_notice) {
                     display_reg_dates.push({ "notice": notice, "date": registration_date });
+                    registration_is_open = true;
                 }
             }
         }
@@ -105,6 +109,7 @@ var RegStatusCard = {
         return template({"reg_notices": reg_notices,
                          "reg_holds": reg_holds,
                          "card": card,
+                         "registration_is_open": registration_is_open,
                          "is_tacoma": window.user.tacoma || window.user.tacoma_affil,
                          "is_bothell": window.user.bothell || window.user.bothell_affil,
                          "is_seattle": window.user.seattle || window.user.seattle_affil,

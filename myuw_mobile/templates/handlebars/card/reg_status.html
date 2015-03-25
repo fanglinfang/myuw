@@ -51,6 +51,12 @@
             <br />
             One of more of the issues below...
             </div>
+            {{ #if registration_is_open }}
+                {{ #unless plan_data.ready_count }}
+                Edit plan to fix issues. <br />
+                Or enter SLNs on Registration screen
+                {{ /unless }}
+            {{ /if}}
             {{ /if }}
             <h4 class="sr-only">Registration Resources</h4>
 			<div class="pull-right">
