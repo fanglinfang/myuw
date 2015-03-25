@@ -5,7 +5,7 @@
                 {
                     "Name": "Date",
                     "DataType": "date",
-                    "Value": "20150330"
+                    "Value": "next_week"
                 },
                 {
                     "Name": "DisplayBegin",
@@ -33,7 +33,7 @@
                 {
                     "Name": "Date",
                     "DataType": "date",
-                    "Value": "20130409"
+                    "Value": "next_week"
                 },
                 {
                     "Name": "DisplayBegin",
