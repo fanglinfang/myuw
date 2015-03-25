@@ -59,7 +59,7 @@ var RegStatusCard = {
                     }
                 }
                 else {
-                    if ((attribute.name == "Quarter") && (attribute.value != "Summer")) {
+                    if ((attribute.name == "Quarter") && (attribute.value == quarter)) {
                         show_notice = true;
                     }
                 }
