@@ -77,6 +77,7 @@
                     {{ /if }}
             {{ /if }}
             <h4 class="sr-only">Registration Resources</h4>
+            {{ #unless registration_is_open }}
 			<div class="pull-right">
 	            <ul class="reg-resources-list">
 	                {{ #if is_tacoma }}
@@ -91,6 +92,7 @@
 	                {{ /if }}
 	            </ul>
 			</div>			
+            {{ /unless }}
 			
 			<!-- CHARLON: not sure why a clearfix wasn't working on the DIV below, but the inline style was... -->                                                                                                
             <div id="reg_resources{{#if card}}_{{card}}{{/if}}" class="slide-hide" style="clear:both;" aria-hidden="true">
