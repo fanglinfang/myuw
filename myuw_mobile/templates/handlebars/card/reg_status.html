@@ -68,6 +68,13 @@
                     {{ /unless }}
                 {{ /unless }}
             {{ /if}}
+            {{ else }}
+                In MyPlan  No courses in your plan<br/>
+                    <a href="">Add courses</a>
+                    {{ #if registration_is_open }}
+                        <br />
+                        <a href="">Registration</a>
+                    {{ /if }}
             {{ /if }}
             <h4 class="sr-only">Registration Resources</h4>
 			<div class="pull-right">
