@@ -47,6 +47,8 @@ class MyPlan(RESTDispatch):
                         sws_section = get_section_by_label(label)
                         section["section_data"] = sws_section.json_data()
                 else:
+                    if len(course["sections"]):
+                        has_sections = True
                     has_unready_courses = True
                     unready_count = unready_count + 1
 
