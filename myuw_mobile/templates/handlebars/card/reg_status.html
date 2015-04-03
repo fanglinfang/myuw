@@ -12,39 +12,40 @@
                     <i class="fa fa-exclamation-triangle"><span class="sr-only">You have registration holds!</span></i>
                     <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information">Show {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
                     <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" style="display: none" aria-controls="reg_holds" href="#" title="Collapse to hide holds information">Hide {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
-
                     <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide" aria-hidden="true" style="text-align:left;">
                         <h4 class="sr-only">Registration holds</h4>
                         <div class="reg-holds">
-
                             <ul class="reg-holds-list">
                                 {{ #each reg_holds }}
                                  <li>{{{ notice_content }}}</li>
                                 {{ /each }}
                             </ul>
-
                         </div>
                     </div>
-
                 </div>
             {{ /if }}
             
             <h4 class="sr-only">Registration Information</h4>    
-            <div class="est-reg-date">
+
+            <!--div class="est-reg-date">
                 <p>
                     {{ #each est_reg_date }}
                         Estimated Registration Date: {{{ toFriendlyDate date }}} <br />
                     {{ /each }}
                 </p>
-            </div>     
+            </div-->
+            
             {{ #if plan_data.courses }}
-            In MyPlan   {{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready<br/>
+            <span>In MyPlan </span><span class="bold_text pull-right">&nbsp;{{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready</span><br/>
+            <span class="pull-right">
             {{ #if plan_data.unready_count }}
                 {{ plan_data.unready_count }} not ready
                 {{ #if plan_data.has_sections }}<a href="javascript:void(0)" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
                 {{ else }} <a href="">Add Sections</a>
                 {{ /if}}
             {{ /if }}
+            </span>
+            <br/>
             <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide">
             Courses not ready<br/>
             {{ #each plan_data.courses }}
@@ -56,36 +57,38 @@
             <br />
             One of more of the issues below...
             </div>
+			<br />
             {{ #if registration_is_open }}
                 {{ #unless plan_data.ready_count }}
-                Edit plan to fix issues. <br />
-                Or enter SLNs on Registration screen
+                <a class="bold_text" href="https://myplan.uw.edu">Edit plan to fix issues.</a><br />
+                Or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
                 {{ else }}
-                    Start registration through MyPlan <br>
-                    or enter SLNs on Registration screen
+                    <a class="bold_text" href="https://myplan.uw.edu">Start registration through MyPlan</a><br>
+                    or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
                 {{ /unless }}
             {{ /if}}
             {{ else }}
-                In MyPlan  No courses in your plan<br/>
-                    <a href="">Add courses</a>
+                <span>In MyPlan </span><span class="pull-right">No courses in your plan</span><br/>
+                    <a class="pull-right" href="">Add courses</a><br />
                     {{ #if registration_is_open }}
-                        <br />
-                        <a href="">Registration</a>
+                        <br/><a class="pull-right bold_text" href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a>
                     {{ /if }}
             {{ /if }}
+			
+			<br />
             <h4 class="sr-only">Registration Resources</h4>
             {{ #unless registration_is_open }}
 			<div class="pull-right">
 	            <ul class="reg-resources-list">
 	                {{ #if is_tacoma }}
-	                    <li><a href="http://www.washington.edu/students/timeschd/T/">Browse time schedule</a></li>
-	                    <li><a href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
+	                    <li class="pull-right time_schedule_link"><a class="bold_text" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule</a></li>
+	                    <li class="pull-right"><a href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
 	                {{ /if }}
 	                {{ #if is_bothell }}
-	                    <li><a href="http://www.uwb.edu/registration/time">Browse time schedule</a></li>
+	                    <li><a class="bold_text" href="http://www.uwb.edu/registration/time">Browse time schedule</a></li>
 	                {{ /if }}
 	                {{ #if is_seattle }}
-	                    <li><a href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
+	                    <li><a class="bold_text" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
 	                {{ /if }}
 	            </ul>
 			</div>			
@@ -108,6 +111,7 @@
                 <div>
                     {{ #if plan_data.has_ready_courses }}
                     <div>
+	                <br/>
                     Ready for registration
                     <br/>
                     {{ #each plan_data.courses }}
@@ -139,6 +143,7 @@
 
                     {{ #if plan_data.has_unready_courses }}
                     <div>
+	                <br />
                     Not ready for registration
                     <br />
                     {{ #each plan_data.courses }}
