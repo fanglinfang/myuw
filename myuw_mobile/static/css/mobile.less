@@ -4,6 +4,8 @@
 @lighttan: #e8e3d3;
 @darktan: #85754d;
 @icon-break-color: #AB9765;
+@detail-section: #dfdfdf;
+
 
 .button-variant(@color; @background; @border) {
 color: @color;
@@ -458,14 +460,20 @@ body {
         
         .card-content {  }
         
-        .card-critical-alert { background: rgb(240,219,208); padding: 8px; margin-bottom: 1em; color: #af4b1a; text-align: center;        
+        .card-critical-alert { 
+	        //padding: 8px; padding-left: 0; 
+	        margin-bottom: 1em; //color: #af4b1a; 
+	        text-align: left;        
 	        i {font-size: 1.5em; vertical-align: middle; margin-right: .2em;}	        
 			a { color: #af4b1a; text-decoration: underline; }
+			.reg_holds_content { background: rgb(240,219,208); }
+			.holds_icon { color:grey;  font-size: 15px; }
         }
 
         .card-noncritical-alert { background: rgb(221,229,239); padding: 8px; margin-bottom: 1em; color: #444; text-align: center;
 	        i { font-size: 1.5em; vertical-align: middle; margin-right: .2em;}	        
 			a {  text-decoration: underline; }
+			
         }
         
         .card-badge-container {
@@ -515,6 +523,14 @@ body {
         
         .card-resources-list { list-style: none; padding-left: 0; }
         .bold_text { font-weight: bold; }
+        .course_not_ready_details { 
+	        background-color:@detail-section;
+	        margin-top:10px;
+	        padding-left:10px;
+	        padding-right:10px;
+	        //padding-bottom:8px;
+	        width: 100%;
+	        }
     }
     
 
@@ -533,6 +549,11 @@ body {
     
     #RegStatusCard, #SummerRegStatusCardA, #SummerRegStatusCard1 {
         
+        .reg-holds { 
+	        background: rgb(240,219,208); 
+	        padding: 8px;
+	        margin-top: 8px;
+	        }
         .reg-holds-list { list-style: none; padding: 0; margin-top: 1em; color:#913f16;
 	        a {color:#4d66ca; text-decoration: none;}
 	        

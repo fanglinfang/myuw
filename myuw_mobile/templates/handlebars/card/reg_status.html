@@ -7,11 +7,13 @@
             <h3>Registration: {{reg_next_quarter}} {{ reg_next_year }}</h3>
             
             {{ #if hold_count }}
-                <div class="card-critical-alert" role="status">
-                    
-                    <i class="fa fa-exclamation-triangle"><span class="sr-only">You have registration holds!</span></i>
-                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information">Show {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
-                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" style="display: none" aria-controls="reg_holds" href="#" title="Collapse to hide holds information">Hide {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+            <div class="card-critical-alert" role="status">
+	            <span>Holds</span>
+					<div class="pull-right">                    
+	                    <i class="fa fa-exclamation-triangle holds_icon"><span class="sr-only">You have registration holds!</span></i>
+	                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information">Show {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+	                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" style="display: none" aria-controls="reg_holds" href="#" title="Collapse to hide holds information">Hide {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+					</div>
                     <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide" aria-hidden="true" style="text-align:left;">
                         <h4 class="sr-only">Registration holds</h4>
                         <div class="reg-holds">
@@ -23,8 +25,9 @@
                         </div>
                     </div>
                 </div>
+                
             {{ /if }}
-            
+                        
             <h4 class="sr-only">Registration Information</h4>    
 
             <!--div class="est-reg-date">
@@ -41,22 +44,34 @@
             {{ #if plan_data.unready_count }}
                 {{ plan_data.unready_count }} not ready
                 {{ #if plan_data.has_sections }}<a href="javascript:void(0)" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
-                {{ else }} <a href="">Add Sections</a>
+                {{ else }} <a href="https://myplan.uw.edu">Add Sections</a>
                 {{ /if}}
             {{ /if }}
             </span>
             <br/>
-            <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide">
-            Courses not ready<br/>
+            
+            <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide course_not_ready_details">
+            <br />
+            <span>Courses not ready</span><br/>
             {{ #each plan_data.courses }}
                 {{ #unless registrations_available }}
                 {{ curriculum_abbr }} {{ course_number }} {{ #unless @last }},{{/unless}}
                 {{ /unless }}
             {{ /each}}
 
+            <br /><br />
+            <span>One or more of the issues below will prevent these courses from being sent to registration:</span>
+            <ul>
+	            <li>Too many/too few sections selected for a course</li>
+	            <li>Time conflict with registered course</li>
+	            <li>Time conflict with a selected section</li>
+	            <li>Planned courses are jointly offered versions of one course</li>
+            </ul>
             <br />
-            One of more of the issues below...
+            <a class="pull-right" href="https://myplan.uw.edu">Edit plan to fix issues</a>
+            <br /><br />
             </div>
+            
 			<br />
             {{ #if registration_is_open }}
                 {{ #unless plan_data.ready_count }}
@@ -69,7 +84,7 @@
             {{ /if}}
             {{ else }}
                 <span>In MyPlan </span><span class="pull-right">No courses in your plan</span><br/>
-                    <a class="pull-right" href="">Add courses</a><br />
+                    <a class="pull-right" href="https://myplan.uw.edu">Add courses</a><br />
                     {{ #if registration_is_open }}
                         <br/><a class="pull-right bold_text" href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a>
                     {{ /if }}
