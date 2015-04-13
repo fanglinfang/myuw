@@ -14,7 +14,7 @@
                     <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information">Show {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
                     <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" style="display: none" aria-controls="reg_holds" href="#" title="Collapse to hide holds information">Hide {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
 				</div>
-                <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide" aria-hidden="true" style="text-align:left;">
+                <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide reg_holds_disc" aria-hidden="true" style="text-align:left;">
                     <h4 class="sr-only">Registration holds</h4>
                     <div class="reg-holds">
                         <ul class="reg-holds-list">
@@ -29,6 +29,19 @@
             {{ /if }}
                         
             <h4 class="sr-only">Registration Information</h4>    
+
+            <!--Estimated Registration Date-->
+            {{ #unless registration_is_open }}
+            <div class="est-reg-date">
+	            <span class="sr-only est_reg_date"></span>
+                <p class="est_reg_date_content" aria-labelledby="est_reg_date">
+                    {{ #each est_reg_date }}
+                        <span class="card-badge-label">Estimated Registration Date:</span><br /> <span>{{{ toFriendlyDate date }}}</span><br />
+                    {{ /each }}
+                </p>
+            </div>
+            {{ /unless }}
+            
             
             {{ #if plan_data.courses }}
             <div id="reg_details">
@@ -36,7 +49,9 @@
 	            <span class="pull-right">
 	            {{ #if plan_data.unready_count }}
 	                {{ plan_data.unready_count }} not ready
-	                {{ #if plan_data.has_sections }}<a href="javascript:void(0)" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
+	                {{ #if plan_data.has_sections }}
+	                	<span id="unready_course_details" class="sr-only">See more details about unready courses</span>
+	                	<a href="javascript:void(0)" aria-labelledby="unready_course_details" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
 	                {{ else }} <a href="https://myplan.uw.edu">Add Sections</a>
 	                {{ /if}}
 	            {{ /if }}
@@ -46,22 +61,23 @@
             
             <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide course_not_ready_details">
 	            <br />
-	            <span>Courses not ready</span><br/>
+	            <h4 class="sr-only">Courses not ready for registration and possible issues causing the same</h4>
+	            <span class="card-badge-label">Courses not ready</span><br/>
+	            <ul id="courses_not_ready_list" style="list-style-type: none; padding-left: 0;">
 	            {{ #each plan_data.courses }}
 	                {{ #unless registrations_available }}
-	                {{ curriculum_abbr }} {{ course_number }} {{ #unless @last }},{{/unless}}
+	                <li>{{ curriculum_abbr }} {{ course_number }}</li> <!--{{ #unless @last }}<br />{{/unless}}-->
 	                {{ /unless }}
 	            {{ /each}}
-	
-	            <br /><br />
-	            <span>One or more of the issues below will prevent these courses from being sent to registration:</span>
+	            </ul>
+	            <span class="card-badge-label">One or more of the issues below will prevent these courses from being sent to registration:</span>
 	            <ul>
 		            <li>Too many/too few sections selected for a course</li>
 		            <li>Time conflict with registered course</li>
 		            <li>Time conflict with a selected section</li>
 		            <li>Planned courses are jointly offered versions of one course</li>
 	            </ul>
-	            <br />
+
 	            <a class="pull-right" href="https://myplan.uw.edu">Edit plan to fix issues</a>
 	            <br /><br />
             </div>
@@ -85,7 +101,7 @@
                     {{ /if }}
             </div>
             {{ /if }}
-			<br />
+
             <h4 class="sr-only">Registration Resources</h4>
             {{ #unless registration_is_open }}
 			<div class="pull-right">
@@ -106,13 +122,13 @@
 			
 			<!-- CHARLON: not sure why a clearfix wasn't working on the DIV below, but the inline style was... -->                                                                                                
 			<span id="reg_resources_desc" class="sr-only">{{reg_next_quarter}} {{ reg_next_year }} plan</span>
-            <div id="reg_resources{{#if card}}_{{card}}{{/if}}" aria-labelledby="reg_resources_desc" aria-expanded="false" class="slide-hide" style="clear:both;" aria-hidden="true">
+            <div id="reg_resources{{#if card}}_{{card}}{{/if}}" aria-labelledby="reg_resources_desc" aria-expanded="false" class="slide-hide reg_resources_disc" style="clear:both;" aria-hidden="true">
                 <!-- data from MyPlan -->
                 <div>
                     {{ #if plan_data.has_ready_courses }}
                     <div>
-	                <br/>
-                    Ready for registration
+	                <h4>Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>
+                    <span class="card-badge-label">Ready for registration</span>
                     <br/>
                     {{ #each plan_data.courses }}
                     {{ #if registrations_available }}
@@ -144,7 +160,7 @@
                     {{ #if plan_data.has_unready_courses }}
                     <div>
 	                <br />
-                    Not ready for registration
+                    <span class="card-badge-label">Not ready for registration</span>
                     <br />
                     {{ #each plan_data.courses }}
                         {{ #unless registrations_available }}
