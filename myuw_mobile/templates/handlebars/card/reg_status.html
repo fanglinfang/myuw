@@ -36,7 +36,7 @@
 	            <span class="sr-only est_reg_date"></span>
                 <p class="est_reg_date_content" aria-labelledby="est_reg_date">
                     {{ #each est_reg_date }}
-                        <span class="card-badge-label">Estimated Registration Date:</span><br /> <span>{{{ toFriendlyDate date }}}</span><br />
+                        <span>Estimated Registration Date:</span> <span class="pull-right">{{{ toFriendlyDate date }}}</span><br />
                     {{ /each }}
                 </p>
             </div>
@@ -85,7 +85,7 @@
 			<br />
             {{ #if registration_is_open }}
                 {{ #unless plan_data.ready_count }}
-                <a class="bold_text" href="https://myplan.uw.edu">Edit plan to fix issues.</a><br />
+                <a class="bold_text" href="https://myplan.uw.edu">Edit plan to fix issues</a><br />
                 Or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
                 {{ else }}
                     <a class="bold_text" href="https://myplan.uw.edu">Start registration through MyPlan</a><br>
@@ -127,19 +127,32 @@
                 <div>
                     {{ #if plan_data.has_ready_courses }}
                     <div>
-	                <h4>Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>
+	                <br/>
+	                <h4 class="quarter-heading">Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>
                     <span class="card-badge-label">Ready for registration</span>
-                    <br/>
-                    {{ #each plan_data.courses }}
+                    <br/><br/>
+
+                    
+                    {{ #each plan_data.courses }} <!--Course-->
                     {{ #if registrations_available }}
                         {{ curriculum_abbr }} {{ course_number }}
-                        <br/>
-                        {{ #each sections }}
-                        {{ section_id }}
+						<table class="reg_status_table table table-condensed borderless" style="border-width: 0;">
+		                    <thead class="sr-only">
+			                    <tr>
+				                    <td>Section</td>
+				                    <td>Day</td>
+				                    <td>Time</td>
+			                    </tr>
+		                    </thead>
+                        <tbody>
+                        {{ #each sections }} <!--Section-->
+                        <tr>
+                        <td>{{ section_id }}</td>
                         {{#each section_data.meetings}}
                             {{#if days_tbd }}
                             Days and times to be arranged<br/>
                             {{else}}
+                            <td>
                                 {{#if meeting_days.monday}}<abbr title="Monday">M</abbr>{{/if}}{{#if
                                 meeting_days.tuesday}}<abbr title="Tuesday">T</abbr>{{/if}}{{#if
                                 meeting_days.wednesday}}<abbr title="Wednesday">W</abbr>{{/if}}{{#if
@@ -147,19 +160,26 @@
                                 meeting_days.friday}}<abbr title="Friday">F</abbr>{{/if}}{{#if
                                 meeting_days.saturday}}<abbr title="Saturday">Sa</abbr>{{/if}}{{#if
                                 meeting_days.sunday}}<abbr title="Sunday">Su</abbr>{{/if}}
-                            {{formatTime start_time}} - {{formatTimeAMPM end_time}}<br />
+                            </td>
+                            <td>{{formatTime start_time}} - {{formatTimeAMPM end_time}}</td>
+                            </tr>
                             {{/if}}
+	                     
                         {{/each}}
-
-                        {{ /each }}
+                        
+                        {{ /each }} <!--Section end-->
+                        </tbody>
+	                    </table> 
                         {{/if}}
-                    {{ /each }}
+                    {{ /each }} <!--Course end-->
                     </div>
                     {{ /if }}
 
                     {{ #if plan_data.has_unready_courses }}
                     <div>
-	                <br />
+	                <br/>
+	                <h4 class="quarter-heading">Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>
+	                
                     <span class="card-badge-label">Not ready for registration</span>
                     <br />
                     {{ #each plan_data.courses }}
@@ -170,8 +190,8 @@
                     </div>
                     {{ /if }}
                 </div>
-
-                <h4>Resources</h4>
+				<br/>
+                <h4 class="resources-heading">Resources</h4>
                 {{ #if plan_data.courses }}
                 <ul class="reg-resources-list">
                     <li><a href="https://myplan.uw.edu">Edit Plan in MyPlan</a> (Academic Planning)</li>
