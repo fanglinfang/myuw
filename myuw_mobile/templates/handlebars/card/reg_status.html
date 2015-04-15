@@ -5,120 +5,125 @@
         <div class="fade-in">
         
             <h3>Registration: {{reg_next_quarter}} {{ reg_next_year }}</h3>
-            
-            {{ #if hold_count }}
-            <div class="card-critical-alert" role="status">
-	            <span>Holds</span>
-				<div class="pull-right">                    
-                    <i class="fa fa-exclamation-triangle holds_icon" aria-hidden="true"></i><span class="sr-only">You have registration holds!</span>
-                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information">Show {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
-                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" style="display: none" aria-controls="reg_holds" href="#" title="Collapse to hide holds information">Hide {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
-				</div>
-                <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide reg_holds_disc" aria-hidden="true" style="text-align:left;">
-                    <h4 class="sr-only">Registration holds</h4>
-                    <div class="reg-holds">
-                        <ul class="reg-holds-list">
-                            {{ #each reg_holds }}
-                             <li>{{{ notice_content }}}</li>
-                            {{ /each }}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-                
-            {{ /if }}
+            <ul title="Registration Information" style="list-style-type: none; padding-left: 0;">
+	            {{ #if hold_count }}
+				<li>
+		            <div class="card-critical-alert" role="status">
+			            <span>Holds</span>
+						<div class="pull-right">                    
+		                    <i class="fa fa-exclamation-triangle holds_icon" aria-hidden="true"></i><span class="sr-only">You have registration holds!</span>
+		                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information">Show {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+		                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" style="display: none" aria-controls="reg_holds" href="#" title="Collapse to hide holds information">Hide {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+						</div>
+		                <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide reg_holds_disc" aria-hidden="true" style="text-align:left;">
+		                    <h4 class="sr-only">Registration holds</h4>
+		                    <div class="reg-holds">
+		                        <ul class="reg-holds-list">
+		                            {{ #each reg_holds }}
+		                             <li>{{{ notice_content }}}</li>
+		                            {{ /each }}
+		                        </ul>
+		                    </div>
+		                </div>
+		            </div>
+				</li>    
+	            {{ /if }}
                         
             <h4 class="sr-only">Registration Information</h4>    
-
+			
             <!--Estimated Registration Date-->
-            {{ #unless registration_is_open }}
-            <div class="est-reg-date">
-	            <span class="sr-only est_reg_date"></span>
-                <p class="est_reg_date_content" aria-labelledby="est_reg_date">
-                    {{ #each est_reg_date }}
-                        <span>Estimated Registration Date:</span> <span class="pull-right">{{{ toFriendlyDate date }}}</span><br />
-                    {{ /each }}
-                </p>
-            </div>
-            {{ /unless }}
+	            {{ #unless registration_is_open }}
+				<li>
+		            <div class="est-reg-date">
+			            <span class="sr-only est_reg_date"></span>
+		                <p class="est_reg_date_content" aria-labelledby="est_reg_date">
+		                    {{ #each est_reg_date }}
+		                        <span>Estimated Registration Date</span> <span class="pull-right">{{{ toFriendlyDate date }}}</span><br />
+		                    {{ /each }}
+		                </p>
+		            </div>
+	            </li>
+	            {{ /unless }}
             
+				<li>
+	            {{ #if plan_data.courses }}
+		            <div id="reg_details">
+			            <span>In MyPlan </span><span class="bold_text pull-right">&nbsp;{{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready</span><br/>
+			            <span class="pull-right">
+			            {{ #if plan_data.unready_count }}
+			                {{ plan_data.unready_count }} not ready
+			                {{ #if plan_data.has_sections }}
+			                	<span id="unready_course_details" class="sr-only">See more details about unready courses</span>
+			                	<a href="javascript:void(0)" aria-labelledby="unready_course_details" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
+			                {{ else }} <a href="https://myplan.uw.edu">Add Sections</a>
+			                {{ /if}}
+			            {{ /if }}
+			            </span>
+		            </div>
+					
+					<br/>
             
-            {{ #if plan_data.courses }}
-            <div id="reg_details">
-	            <span>In MyPlan </span><span class="bold_text pull-right">&nbsp;{{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready</span><br/>
-	            <span class="pull-right">
-	            {{ #if plan_data.unready_count }}
-	                {{ plan_data.unready_count }} not ready
-	                {{ #if plan_data.has_sections }}
-	                	<span id="unready_course_details" class="sr-only">See more details about unready courses</span>
-	                	<a href="javascript:void(0)" aria-labelledby="unready_course_details" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
-	                {{ else }} <a href="https://myplan.uw.edu">Add Sections</a>
-	                {{ /if}}
-	            {{ /if }}
-	            </span>
-            </div>
-            <br/>
+		            <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide course_not_ready_details">
+			            <br />
+			            <h4 class="sr-only">Courses not ready for registration and possible issues causing the same</h4>
+			            <span class="card-badge-label">Courses not ready</span><br/>
+			            <ul id="courses_not_ready_list" style="list-style-type: none; padding-left: 0;">
+			            {{ #each plan_data.courses }}
+			                {{ #unless registrations_available }}
+			                <li>{{ curriculum_abbr }} {{ course_number }}</li> <!--{{ #unless @last }}<br />{{/unless}}-->
+			                {{ /unless }}
+			            {{ /each}}
+			            </ul>
+			            <span class="card-badge-label">One or more of the issues below will prevent these courses from being sent to registration:</span>
+			            <ul>
+				            <li>Too many/too few sections selected for a course</li>
+				            <li>Time conflict with registered course</li>
+				            <li>Time conflict with a selected section</li>
+				            <li>Planned courses are jointly offered versions of one course</li>
+			            </ul>
+		
+			            <a class="pull-right" href="https://myplan.uw.edu">Edit plan to fix issues</a>
+			            <br /><br />
+		            </div>
             
-            <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide course_not_ready_details">
-	            <br />
-	            <h4 class="sr-only">Courses not ready for registration and possible issues causing the same</h4>
-	            <span class="card-badge-label">Courses not ready</span><br/>
-	            <ul id="courses_not_ready_list" style="list-style-type: none; padding-left: 0;">
-	            {{ #each plan_data.courses }}
-	                {{ #unless registrations_available }}
-	                <li>{{ curriculum_abbr }} {{ course_number }}</li> <!--{{ #unless @last }}<br />{{/unless}}-->
-	                {{ /unless }}
-	            {{ /each}}
-	            </ul>
-	            <span class="card-badge-label">One or more of the issues below will prevent these courses from being sent to registration:</span>
-	            <ul>
-		            <li>Too many/too few sections selected for a course</li>
-		            <li>Time conflict with registered course</li>
-		            <li>Time conflict with a selected section</li>
-		            <li>Planned courses are jointly offered versions of one course</li>
-	            </ul>
-
-	            <a class="pull-right" href="https://myplan.uw.edu">Edit plan to fix issues</a>
-	            <br /><br />
-            </div>
-            
-			<br />
-            {{ #if registration_is_open }}
-                {{ #unless plan_data.ready_count }}
-                <a class="bold_text" href="https://myplan.uw.edu">Edit plan to fix issues</a><br />
-                Or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
-                {{ else }}
-                    <a class="bold_text" href="https://myplan.uw.edu">Start registration through MyPlan</a><br>
-                    or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
-                {{ /unless }}
-            {{ /if}}
-            {{ else }}
-            <div id="reg_details">
-                <span>In MyPlan </span><span class="pull-right">No courses in your plan</span><br/>
-                    <a class="pull-right" href="https://myplan.uw.edu">Add courses</a><br />
-                    {{ #if registration_is_open }}
-                        <br/><a class="pull-right bold_text" href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a>
-                    {{ /if }}
-            </div>
-            {{ /if }}
-
-            <h4 class="sr-only">Registration Resources</h4>
-            {{ #unless registration_is_open }}
-			<div class="pull-right">
-	            <ul class="reg-resources-list">
-	                {{ #if is_tacoma }}
-	                    <li class="pull-right time_schedule_link"><span id="tacoma_time_schedule" class="sr-only">Browse time schedule for Tacoma</span><a class="bold_text" aria-labelledby="tacoma_time_schedule" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule</a></li>
-	                    <li class="pull-right"><a href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
-	                {{ /if }}
-	                {{ #if is_bothell }}
-	                    <li><span id="bothell_time_schedule" class="sr-only">Browse time schedule for Bothell</span><a class="bold_text" aria-labelledby="bothell_time_schedule" href="http://www.uwb.edu/registration/time">Browse time schedule</a></li>
-	                {{ /if }}
-	                {{ #if is_seattle }}
-	                    <li><span id="seattle_time_schedule" class="sr-only">Browse time schedule for Seattle</span><a class="bold_text" aria-labelledby="seattle_time_schedule" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
-	                {{ /if }}
-	            </ul>
-			</div>
-            {{ /unless }}
+					<br />
+		            {{ #if registration_is_open }}
+		                {{ #unless plan_data.ready_count }}
+		                <a class="bold_text" href="https://myplan.uw.edu">Edit plan to fix issues</a><br />
+		                Or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
+		                {{ else }}
+		                    <a class="bold_text" href="https://myplan.uw.edu">Start registration through MyPlan</a><br>
+		                    or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
+		                {{ /unless }}
+		            {{ /if}}
+		            {{ else }}
+		            <div id="reg_details">
+		                <span>In MyPlan </span><span class="pull-right">No courses in your plan</span><br/>
+		                    <a class="pull-right" href="https://myplan.uw.edu">Add courses</a><br />
+		                    {{ #if registration_is_open }}
+		                        <br/><a class="pull-right bold_text" href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a>
+		                    {{ /if }}
+		            </div>
+		            {{ /if }}
+				</li>
+			</ul>
+		            <h4 class="sr-only">Registration Resources</h4>
+		            {{ #unless registration_is_open }}
+					<div class="pull-right">
+			            <ul class="reg-resources-list">
+			                {{ #if is_tacoma }}
+			                    <li class="pull-right time_schedule_link"><span id="tacoma_time_schedule" class="sr-only">Browse time schedule for Tacoma</span><a class="bold_text" aria-labelledby="tacoma_time_schedule" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule</a></li>
+			                    <li class="pull-right"><a href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
+			                {{ /if }}
+			                {{ #if is_bothell }}
+			                    <li><span id="bothell_time_schedule" class="sr-only">Browse time schedule for Bothell</span><a class="bold_text" aria-labelledby="bothell_time_schedule" href="http://www.uwb.edu/registration/time">Browse time schedule</a></li>
+			                {{ /if }}
+			                {{ #if is_seattle }}
+			                    <li><span id="seattle_time_schedule" class="sr-only">Browse time schedule for Seattle</span><a class="bold_text" aria-labelledby="seattle_time_schedule" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
+			                {{ /if }}
+			            </ul>
+					</div>
+		            {{ /unless }}
 			
 			<!-- CHARLON: not sure why a clearfix wasn't working on the DIV below, but the inline style was... -->                                                                                                
 			<span id="reg_resources_desc" class="sr-only">{{reg_next_quarter}} {{ reg_next_year }} plan</span>
