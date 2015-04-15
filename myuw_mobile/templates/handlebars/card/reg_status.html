@@ -55,7 +55,7 @@
 			                {{ #if plan_data.has_sections }}
 			                	<span id="unready_course_details" class="sr-only">See more details about unready courses</span>
 			                	<a href="javascript:void(0)" aria-labelledby="unready_course_details" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
-			                {{ else }} <a href="https://myplan.uw.edu">Add Sections</a>
+			                {{ else }} <a href="http://myplan.uw.edu">Add Sections</a>
 			                {{ /if}}
 			            {{ /if }}
 			            </span>
@@ -82,24 +82,24 @@
 				            <li>Planned courses are jointly offered versions of one course</li>
 			            </ul>
 		
-			            <a class="pull-right" href="https://myplan.uw.edu">Edit plan to fix issues</a>
+			            <a class="pull-right" href="http://myplan.uw.edu">Edit plan to fix issues</a>
 			            <br /><br />
 		            </div>
             
 					<br />
 		            {{ #if registration_is_open }}
 		                {{ #unless plan_data.ready_count }}
-		                <a class="bold_text" href="https://myplan.uw.edu">Edit plan to fix issues</a><br />
+		                <a class="bold_text" href="http://myplan.uw.edu">Edit plan to fix issues</a><br />
 		                Or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
 		                {{ else }}
-		                    <a class="bold_text" href="https://myplan.uw.edu">Start registration through MyPlan</a><br>
+		                    <a class="bold_text" href="http://myplan.uw.edu">Start registration through MyPlan</a><br>
 		                    or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a>
 		                {{ /unless }}
 		            {{ /if}}
 		            {{ else }}
 		            <div id="reg_details">
 		                <span>In MyPlan </span><span class="pull-right">No courses in your plan</span><br/>
-		                    <a class="pull-right" href="https://myplan.uw.edu">Add courses</a><br />
+		                    <a class="pull-right" href="http://myplan.uw.edu">Add courses</a><br />
 		                    {{ #if registration_is_open }}
 		                        <br/><a class="pull-right bold_text" href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a>
 		                    {{ /if }}
@@ -199,14 +199,14 @@
                 <h4 class="resources-heading">Resources</h4>
                 {{ #if plan_data.courses }}
                 <ul class="reg-resources-list">
-                    <li><a href="https://myplan.uw.edu">Edit Plan in MyPlan</a> (Academic Planning)</li>
+                    <li><a href="http://myplan.uw.edu">Edit Plan in MyPlan</a> (Academic Planning)</li>
                     <li><a href="https://uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Degree Audit Reporting System (DARS)</a></li>
                 </ul>
 
                 {{ else }}
                 <ul class="reg-resources-list">
 					<li><a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a></li>
-                    <li><a href="https://myplan.uw.edu">MyPlan</a> (Academic Planning)</li>
+                    <li><a href="http://myplan.uw.edu">MyPlan</a> (Academic Planning)</li>
                     <li><a href="https://uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Degree Audit Reporting System (DARS)</a></li>
                 </ul>
                 {{ /if }}
