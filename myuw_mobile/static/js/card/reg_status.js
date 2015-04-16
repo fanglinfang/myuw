@@ -224,15 +224,21 @@ var RegStatusCard = {
 
                 div.toggleClass("slide-show");
                 if (div.hasClass("slide-show")) {
-                    expose.hide();
-                    hide.show();
+                    expose.attr("hidden", true);
+                    expose.attr("aria-hidden", true);
+                    hide.attr("hidden", false);
+                    hide.attr("aria-hidden", false);
+                    div.attr("aria-hidden", false)
                     window.myuw_log.log_card("RegHolds", "expand");
                 }
                 else {
                     window.myuw_log.log_card("RegHolds", "collapse");
                     setTimeout(function () {
-                        expose.show();
-                        hide.hide();
+                        expose.attr("hidden", false);
+                        expose.attr("aria-hidden", false);
+                        hide.attr("hidden", true);
+                        hide.attr("aria-hidden", true);
+                        div.attr("aria-hidden", true)
                     }, 700);
                 }
             });
