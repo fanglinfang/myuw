@@ -14,6 +14,7 @@ from myuw_mobile.views.api.notices import Notices
 from myuw_mobile.views.api.myplan import MyPlan
 from myuw_mobile.views.api.academic_events import AcademicEvents
 from myuw_mobile.views.page import index
+from myuw_mobile.views.api.calendar import DepartmentalCalendar
 from django.contrib.auth.decorators import login_required
 
 
@@ -66,6 +67,8 @@ urlpatterns = patterns(
     url(r'^api/v1/myplan/(?P<year>\d{4})/(?P<quarter>[a-zA-Z]+)',
         login_required(MyPlan().run),
         name="myuw_myplan"),
+    url(r'^api/v1/deptcal/$', login_required(DepartmentalCalendar().run),
+        name="myuw_deptcal_events"),
     url(r'^api/v1/academic_events$', login_required(AcademicEvents().run),
         name="myuw_academic_calendar"),
     url(r'^api/v1/academic_events/current/$',
