@@ -38,7 +38,7 @@
 			            <span class="sr-only est_reg_date"></span>
 		                <p class="est_reg_date_content" aria-labelledby="est_reg_date">
 		                    {{ #each est_reg_date }}
-		                        <span>Estimated Registration Date</span> <span class="pull-right">{{{ toFriendlyDate date }}}</span><br />
+		                        <div style="display:inline-block;">Estimated <br/>Registration Date</div> <div class="pull-right" style="font-weight: bold; display:inline-block"><span>{{{ toFriendlyDate date }}}</span><br/><span class="pull-right">at 6:00 AM</span></div><br />
 		                    {{ /each }}
 		                </p>
 		            </div>
