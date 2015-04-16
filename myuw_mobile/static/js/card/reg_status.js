@@ -228,7 +228,7 @@ var RegStatusCard = {
                     expose.attr("aria-hidden", true);
                     hide.attr("hidden", false);
                     hide.attr("aria-hidden", false);
-                    div.attr("aria-hidden", false)
+                    div.attr("aria-hidden", false);
                     window.myuw_log.log_card("RegHolds", "expand");
                 }
                 else {
@@ -238,7 +238,7 @@ var RegStatusCard = {
                         expose.attr("aria-hidden", false);
                         hide.attr("hidden", true);
                         hide.attr("aria-hidden", true);
-                        div.attr("aria-hidden", true)
+                        div.attr("aria-hidden", true);
                     }, 700);
                 }
             });
