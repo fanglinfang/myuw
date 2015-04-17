@@ -213,13 +213,13 @@ var RegStatusCard = {
                 var div, expose, hide;
                 if (label) {
                     div = $("#reg_holds_"+label);
-                    expose = $("#show_reg_holds_"+label);
-                    hide = $("#hide_reg_holds_"+label);
+                    expose = $("#show_reg_holds_wrapper_"+label);
+                    hide = $("#hide_reg_holds_wrapper_"+label);
                 }
                 else {
                     div = $("#reg_holds");
-                    expose = $("#show_reg_holds");
-                    hide = $("#hide_reg_holds");
+                    expose = $("#show_reg_holds_wrapper");
+                    hide = $("#hide_reg_holds_wrapper");
                 }
 
                 div.toggleClass("slide-show");
