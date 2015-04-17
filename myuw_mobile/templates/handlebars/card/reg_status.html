@@ -224,8 +224,6 @@
             
             <div class="card-disclosure">
                 {{ #if plan_data.courses }}
-                <span id="show_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show {{reg_next_quarter}} {{ reg_next_year }} plan</span>
-                <span id="hide_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Hide {{reg_next_quarter}} {{ reg_next_year }} plan</span>
                 <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
                     <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
                     <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show {{reg_next_quarter}} {{ reg_next_year }} plan</a>
@@ -236,10 +234,16 @@
                 </span>
 
                 {{ else }}
-                <span id="show_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show more</span>
-                <span id="hide_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show less</span>
-                <span id="show_hide_reg_resources_label" class="sr-only">Expand to show additional registration resources</span>
-                <a id="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_hide_reg_resources_label" href="#" title="Expand to show additional registration resources">Show more</a>
+                <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
+                    <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
+                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show more</a>
+                </span>
+                <span id="hide_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
+                    <span id="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Collapse to hide additional registration resources</span>
+                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Collapse to hide additional registration resources">Show less</a>
+                </span>
+
+
                 {{ /if }}
             </div>
         
