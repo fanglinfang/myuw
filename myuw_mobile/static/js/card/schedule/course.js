@@ -87,27 +87,46 @@ var CourseCard = {
         });
         
         
-        $(".slide-link").on("click", function(ev) {
+        $(".toggle_course_card_resources").on("click", function(ev) {
             ev.preventDefault();
-            var hidden_block = $(ev.target).parent().siblings(".slide-hide")[0];
-            var slide_link = this;
-                        
-            $(hidden_block).toggleClass("slide-show");
+            var matches = this.id.match(/(\d+)$/);
+            var course_index = matches[1];
             var card = $(ev.target).closest("[data-type='card']");
 
-            if ($(hidden_block).hasClass("slide-show")) {
-                $(slide_link).text("SHOW LESS");
-                $(slide_link).attr("title", "Show less course information");
-                $(hidden_block).attr("aria-hidden", "false");
-                 window.myuw_log.log_card(card, "expand");
+            var div = $("#course"+course_index);
+            var expose = $("#show_course_resources_wrapper"+course_index);
+            var hide = $("#hide_course_resources_wrapper"+course_index);
+
+            if (div.css('display') == 'none') {
+                div.show();
+                div.attr("hidden", false);
+                // Without this timeout, the animation doesn't happen - the block just appears.
+                window.setTimeout(function() {
+                    div.toggleClass("slide-show");
+                    expose.attr("hidden", true);
+                    expose.attr("aria-hidden", true);
+                    hide.attr("hidden", false);
+                    hide.attr("aria-hidden", false);
+
+                    div.attr("aria-expanded", true);
+                    div.focus();
+                }, 0);
+
+                window.myuw_log.log_card(card, "expand");
             }
             else {
-                $(slide_link).attr("title", "Show more course information");
-                $(hidden_block).attr("aria-hidden", "true");
-                setTimeout(function() {
-                      $(slide_link).text("SHOW MORE");
-                }, 700);
+                div.toggleClass("slide-show");
                 window.myuw_log.log_card(card, "collapse");
+
+                setTimeout(function() {
+                    expose.attr("hidden", false);
+                    expose.attr("aria-hidden", false);
+                    hide.attr("hidden", true);
+                    hide.attr("aria-hidden", true);
+                    div.attr("aria-expanded", false);
+                    div.attr("hidden", true);
+                    div.hide();
+                }, 700);
             }
         });
 

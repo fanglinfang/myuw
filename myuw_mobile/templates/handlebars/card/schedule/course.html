@@ -69,7 +69,7 @@
                 
             </table>
             
-            <div id="course{{index}}" class="slide-hide" rel="{{ curriculum_abbr }} {{course_number}} {{section_id}}" aria-hidden="true">
+            <div id="course{{index}}" class="slide-hide" rel="{{ curriculum_abbr }} {{course_number}} {{section_id}}" aria-hidden="true" style="display: none;">
                 
                 <div>
                     <h5>Course resources</h5>
@@ -127,7 +127,14 @@
             </div>
             
             <div class="card-disclosure">
-                <a class="slide-link" href="#" aria-controls="course{{index}}" title="Show more course information">Show more</a>                    
+                <span id="show_course_resources_wrapper{{index}}">
+                    <span id="show_course_resources_label{{index}}" class="sr-only">Show additional course resources</span>
+                    <a class="toggle_course_card_resources" id="show_course_{{index}}" aria-controls="course{{index}}" aria-labelledby="show_course_resources_label{{index}}" href="#" title="Show more course information">Show more</a>
+                </span>
+                <span id="hide_course_resources_wrapper{{index}}" hidden aria-hidden="true">
+                    <span id="hide_course_resources_label{{index}}" class="sr-only">Hide additional course resources</span>
+                    <a class="toggle_course_card_resources" id="hide_course_{{index}}" aria-controls="course{{index}}" aria-labelledby="hide_course_resources_label{{index}}" href="#" title="Show less course information">Show less</a>
+                </span>
             </div>
             
         </div>
