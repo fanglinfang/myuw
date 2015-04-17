@@ -57,8 +57,14 @@
 			            {{ #if plan_data.unready_count }}
 			                {{ plan_data.unready_count }} not ready
 			                {{ #if plan_data.has_sections }}
-			                	<span id="unready_course_details" class="sr-only">See more details about unready courses</span>
-			                	<a href="javascript:void(0)" aria-labelledby="unready_course_details" id="show_unready_courses{{# if card }}_{{card}}{{/if}}">See details</a>
+                                <span id="show_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}">
+			                	    <span class="sr-only" id="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}">See more details about unready courses</span>
+			                	    <a href="javascript:void(0)" aria-labelledby="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure">See details</a>
+                                </span>
+                                <span id="hide_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
+			                	    <span id="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Hide details for unready courses</span>
+			                	    <a href="javascript:void(0)" aria-labelledby="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure">Hide details</a>
+                                </span>
 			                {{ else }} <a href="http://myplan.uw.edu">Add Sections</a>
 			                {{ /if}}
 			            {{ /if }}

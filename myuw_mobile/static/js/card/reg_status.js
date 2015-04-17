@@ -127,12 +127,12 @@ var RegStatusCard = {
         if (card) {
             id = "#show_reg_resources_"+card;
             holds_class = ".reg_disclosure_"+card;
-            unready_courses = "#show_unready_courses_"+card;
+            unready_courses = ".myplan_unready_courses_disclosure";
         }
         else {
             id = "#show_reg_resources";
             holds_class = ".reg_disclosure";
-            unready_courses = "#show_unready_courses";
+            unready_courses = ".myplan_unready_courses_disclosure";
         }
 
         // Prevent a closure on card
@@ -179,11 +179,13 @@ var RegStatusCard = {
                 var div, expose;
                 if (label) {
                     div = $("#myplan_unready_courses_"+label);
-                    expose = $("#show_unready_courses_"+label);
+                    expose = $("#show_unready_courses_wrapper_"+label);
+                    hide = $("#hide_unready_courses_wrapper_"+label);
                 }
                 else {
                     div = $("#myplan_unready_courses");
-                    expose = $("#show_unready_courses");
+                    expose = $("#show_unready_courses_wrapper");
+                    hide = $("#hide_unready_courses_wrapper");
                 }
 
                 ev.preventDefault();
@@ -192,15 +194,20 @@ var RegStatusCard = {
                 div.toggleClass("slide-show");
 
                 if (div.hasClass("slide-show")) {
-                    expose.text("Hide details");
+                    expose.attr("hidden", true);
+                    expose.attr("aria-hidden", true);
+                    hide.attr("hidden", false);
+                    hide.attr("aria-hidden", false);
                     div.attr('aria-hidden', 'false');
-                    // expose.attr('title', '');
                 } else {
-                    div.attr('aria-hidden', 'true');
-                    // expose.attr('title', '');
 
                     setTimeout(function() {
-                        expose.text("See details");
+                        expose.attr("hidden", false);
+                        expose.attr("aria-hidden", false);
+                        hide.attr("hidden", true);
+                        hide.attr("aria-hidden", true);
+                        div.attr("aria-hidden", true);
+
                     }, 700);
                 }
 
