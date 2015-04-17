@@ -59,11 +59,11 @@
 			                {{ #if plan_data.has_sections }}
                                 <span id="show_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}">
 			                	    <span class="sr-only" id="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}">See more details about unready courses</span>
-			                	    <a href="javascript:void(0)" aria-labelledby="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure">See details</a>
+			                	    <a href="javascript:void(0)" aria-labelledby="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}">See details</a>
                                 </span>
                                 <span id="hide_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
 			                	    <span id="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Hide details for unready courses</span>
-			                	    <a href="javascript:void(0)" aria-labelledby="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure">Hide details</a>
+			                	    <a href="javascript:void(0)" aria-labelledby="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}">Hide details</a>
                                 </span>
 			                {{ else }} <a href="http://myplan.uw.edu">Add Sections</a>
 			                {{ /if}}
@@ -226,8 +226,15 @@
                 {{ #if plan_data.courses }}
                 <span id="show_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show {{reg_next_quarter}} {{ reg_next_year }} plan</span>
                 <span id="hide_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Hide {{reg_next_quarter}} {{ reg_next_year }} plan</span>
-                <span id="show_hide_plan_reg_resources_label" class="sr-only">Expand to show additional registration resources</span>
-                <a id="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_hide_plan_reg_resources_label" href="#" title="Expand to show additional registration resources">Show {{reg_next_quarter}} {{ reg_next_year }} plan</a>
+                <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
+                    <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
+                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show {{reg_next_quarter}} {{ reg_next_year }} plan</a>
+                </span>
+                <span id="hide_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
+                    <span id="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Collapse to hide additional registration resources</span>
+                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Collapse to hide additional registration resources">Hide {{reg_next_quarter}} {{ reg_next_year }} plan</a>
+                </span>
+
                 {{ else }}
                 <span id="show_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show more</span>
                 <span id="hide_reg_label{{# if card }}_{{card}}{{/if}}" style="display:none;">Show less</span>

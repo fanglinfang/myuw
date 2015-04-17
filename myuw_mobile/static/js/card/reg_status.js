@@ -125,31 +125,29 @@ var RegStatusCard = {
         // show registration resources
         var id, holds_class, unready_courses;
         if (card) {
-            id = "#show_reg_resources_"+card;
+            card_disclosure_class = ".show_reg_resources_"+card;
             holds_class = ".reg_disclosure_"+card;
-            unready_courses = ".myplan_unready_courses_disclosure";
+            unready_courses = ".myplan_unready_courses_disclosure_"+card;
         }
         else {
-            id = "#show_reg_resources";
+            card_disclosure_class = ".show_reg_resources";
             holds_class = ".reg_disclosure";
             unready_courses = ".myplan_unready_courses_disclosure";
         }
 
         // Prevent a closure on card
         (function(label) {
-            $('body').on('click', id, function (ev) {
+            $('body').on('click', card_disclosure_class, function (ev) {
                 var div, expose, show_expose, hide_expose;
                 if (label) {
                     div = $("#reg_resources_"+label);
-                    expose = $("#show_reg_resources_"+label);
-                    show_expose = $("#show_reg_label_"+label).html();
-                    hide_expose = $("#hide_reg_label_"+label).html();
+                    expose = $("#show_reg_resources_wrapper_"+label);
+                    hide = $("#hide_reg_resources_wrapper_"+label);
                 }
                 else {
                     div = $("#reg_resources");
-                    expose = $("#show_reg_resources");
-                    show_expose = $("#show_reg_label").html();
-                    hide_expose = $("#hide_reg_label").html();
+                    expose = $("#show_reg_resources_wrapper_"+label);
+                    hide = $("#hide_reg_resources_wrapper_"+label);
                 }
 
                 ev.preventDefault();
@@ -158,17 +156,21 @@ var RegStatusCard = {
                 div.toggleClass("slide-show");
 
                 if (div.hasClass("slide-show")) {
-                    expose.text(hide_expose);
+                    expose.attr("hidden", true);
+                    expose.attr("aria-hidden", true);
+                    hide.attr("hidden", false);
+                    hide.attr("aria-hidden", false);
                     div.attr('aria-hidden', 'false');
-                    expose.attr('title', 'Collapse to hide additional registration resources');
                     window.myuw_log.log_card(card, "expand");
                 } else {
                     div.attr('aria-hidden', 'true');
-                    expose.attr('title', 'Expand to show additional registration resources');
                     window.myuw_log.log_card(card, "collapse");
 
                     setTimeout(function() {
-                        expose.text(show_expose);
+                        expose.attr("hidden", false);
+                        expose.attr("aria-hidden", false);
+                        hide.attr("hidden", true);
+                        hide.attr("aria-hidden", true);
                     }, 700);
                 }
             });
