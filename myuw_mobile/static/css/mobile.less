@@ -4,7 +4,7 @@
 @lighttan: #e8e3d3;
 @darktan: #85754d;
 @icon-break-color: #AB9765;
-@detail-section: #dfdfdf;
+@detail-section: rgba(100, 185, 84, 0.08);
 
 
 .button-variant(@color; @background; @border) {
@@ -476,10 +476,10 @@ body {
 	        i {font-size: 1.5em; vertical-align: middle; margin-right: .2em;}	        
 			a { color: #af4b1a; text-decoration: underline; }
 			.reg_holds_disc { 
-				background: rgb(240,219,208); 
+				background: rgba(255, 140, 138, 0.16);
 				margin-left: -10px;
 				margin-right: -10px;
-				margin-top: 8px;
+				margin-top: 28px;
 				}
 
 			.holds_icon { color:grey;  font-size: 15px; }
@@ -512,7 +512,7 @@ body {
         
         .card-badge-container {
             .card_list { list-style: none; padding-left: 0; }                
-            .card-badge {  padding: 8px 10px 10px 0px; position: relative;
+            .card-badge {  padding: 8px 0px 10px 0px; position: relative;
 
                 .card-badge-label { display: block; font-weight: bold; line-height: 35px; }
                 .card-badge-action { display: block; font-weight: normal; line-height: 35px; margin-top: -10px; 
@@ -559,7 +559,7 @@ body {
         .bold_text { font-weight: bold; }
         .course_not_ready_details { 
 	        background-color:@detail-section;
-	        margin-top:10px;
+	        margin-top:0px;
 	        margin-left:-10px;
 	        margin-right:-10px;
 	        padding-left:10px;
@@ -585,24 +585,73 @@ body {
 
     // registration card
     
-    #RegStatusCard, #SummerRegStatusCardA, #SummerRegStatusCard1 {
+    #RegStatusCard, #SummerRegStatusCardA, #SummerRegStatusCard1 {     
         
-        .reg-holds { 
-	        background: rgb(240,219,208); 
-	        padding: 8px;
-	        margin-top: 8px;
+        .card-badge-container {    
+	        .card-critical-alert {    	        
+		        .reg-holds-container {
+			        .card-badge-label {line-height: 0px;}
+			        .card-badge-value {font-size: inherit; font-weight: bold; line-height: 20px;
+				        a {text-decoration: none;}
+			        }
+			        .reg_holds_disc {background: rgba(255, 140, 138, 0.16);
+				        .reg-holds { 
+					        padding: 8px;
+					        margin-top: 8px;
+				        
+					        .reg-holds-list { list-style: none; padding: 0; /*margin-top: 1em;*/ color:#913f16;
+						        a {color:#4d66ca; text-decoration: none;}
+						        
+						        ul { margin-top:5px;
+					            	li { margin-bottom: 1em; }
+					            }
+					            	
+					        	li { margin-bottom: 1em; }
+					        }
+						}
+					}
+		        }
 	        }
-        .reg-holds-list { list-style: none; padding: 0; margin-top: 1em; color:#913f16;
-	        a {color:#4d66ca; text-decoration: none;}
 	        
-	        ul { margin-top:5px;
-            	li { margin-bottom: 1em; }
-            }
-            	
-        	li { margin-bottom: 1em; }
-        }     
-        
-        .est-reg-date { margin-bottom: 20px; }
+	        .est-reg-date-container {
+	        	.est-reg-date { margin-bottom: 20px; 
+		        	.card-badge-label {line-height: 18px; margin-top: 0px;}
+					.card-badge-value {line-height: 18px; font-size: 16px; 
+						.est-reg-time {font-size: 75%;font-weight:normal;}
+					}
+	        	}
+	        }
+        	.reg-details-container {
+	        	.reg-details {
+		        	.card-badge-label {}
+	        		.card-badge-value {font-size: 14px;line-height:18px}
+        		}
+	        }
+	        .course-not-ready-details {background-color:@detail-section; margin-top:0px;margin-left:-10px;margin-right:-10px;padding-left:10px;padding-right:10px;
+				.card-badge-label {margin-top:15px;margin-bottom:10px;}
+					//padding-bottom:8px;
+					//width: 100%;
+				.courses-not-ready-message {}
+		        .courses-not-ready-list {list-style-type: none; padding-left: 10px; margin-bottom:5px;
+			        .courses-not-ready-list-item {}
+		        }
+		        .courses-not-ready-issues {list-style-type:circle;
+			        li {line-height:18px;padding-bottom:8px;
+				        i {color:rgba(238, 150, 16, 0.79)}
+			        }
+		        }
+		        .edit-plan-link {padding: 5px 0 10px 5px;}
+	        }
+	        .reg-details-closed-container {
+		        .reg-details-closed {
+			        .card-badge-label {margin-top: 0px;}
+			        .card-badge-value {line-height: 25px;}
+		        }
+		        .edit-plan-link {padding: 5px 0 10px 5px;}
+	        }
+	        .reg-details-open {margin-top:10px;}
+	        .reg-link {margin-top:10px;}
+	    }
         
         .reg-notice-list { list-style: none; padding: 5px 0; 
              
