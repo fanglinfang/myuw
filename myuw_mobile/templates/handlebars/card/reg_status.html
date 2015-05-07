@@ -16,12 +16,12 @@
 				            </div>
 							<div class="pull-right">  
 								<div class="card-badge-value">                  
-				                    <!--<i class="fa fa-exclamation-triangle holds_icon" aria-hidden="true"></i>--><span class="sr-only">You have registration holds!</span>
+				                    <span class="sr-only">You have registration holds!</span>
 		                            <span id="show_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}">
-		    		                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information"><i class="fa fa-plus" style="font-size:70%;"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+		    		                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information"><i class="fa fa-plus" style="font-size:70%;" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
 		                            </span>
 		                            <span id="hide_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}" hidden aria-hidden="true">
-		    		                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Collapse to hide holds information"><i class="fa fa-minus" style="font-size:70%;"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+		    		                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Collapse to hide holds information"><i class="fa fa-minus" style="font-size:70%;" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
 		                            </span>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 			                    {{ #each est_reg_date }}
 				                    <span class="sr-only est_reg_date">Estimated Registration Date: {{{ toFriendlyDateVerbose date }}}</span>
 			                        <div class="pull-left" style="display:inline-block;">
-				                        <h4 class="card-badge-label">Registration Date <br /><span class="" style="font-size:75%; font-weight:normal; font-style:italic;">(Estimated)</span> </h4>
+				                        <h4 class="card-badge-label">Est. Registration Date <!-- <br /><span class="" style="font-size:75%; font-weight:normal; font-style:italic;">(Estimated)</span>--> </h4>
 				                    </div> 
 			                        <div class="pull-right">
 				                        <div class="card-badge-value">{{{ toFriendlyDate date }}}<br/><span class="est-reg-time">at 6:00 AM</span></div>
