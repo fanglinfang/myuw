@@ -624,7 +624,9 @@ body {
         	.reg-details-container {
 	        	.reg-details {
 		        	.card-badge-label {}
-	        		.card-badge-value {font-size: 14px;line-height:18px}
+	        		.card-badge-value {font-size: 14px;line-height:18px;
+		        		.course-ready {font-weight: normal;}
+	        		}
         		}
 	        }
 	        .course-not-ready-details {background-color:@detail-section; margin-top:0px;margin-left:-10px;margin-right:-10px;padding-left:10px;padding-right:10px;
@@ -649,16 +651,22 @@ body {
 		        }
 		        .edit-plan-link {padding: 5px 0 10px 5px;}
 	        }
-	        .reg-details-open {margin-top:10px;}
+	        .reg-details-open {margin-top:10px; text-align:right;
+		        .reg-link {font-size:12px;}
+	        }
 	        .reg-link {margin-top:10px;}
 	    }
 	    
 	    .reg_resources_disc {
+		    h4 {font-weight:500;}
 		    .card-badge-label {padding-bottom:5px;}
 		    .reg-status-table {margin-left:10px; margin-bottom: 10px;
 			    .reg-status-table-row {
 				    td {padding:0px;}
 			    }
+		    }
+		    .reg-resources {
+			    .reg-resources-list { list-style: none; padding-left: 0; }
 		    }
 	    }
         
@@ -666,8 +674,6 @@ body {
              
             li { margin-bottom: 1em; }
         }
-        
-        .reg-resources-list { list-style: none; padding-left: 0; }
         
         
         .notice-list { margin-top: 5px; margin-bottom: 10px; list-style: disc; 
