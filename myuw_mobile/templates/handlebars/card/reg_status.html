@@ -18,10 +18,10 @@
 								<div class="card-badge-value">                  
 				                    <span class="sr-only">You have registration holds!</span>
 		                            <span id="show_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}">
-		    		                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information"><i class="fa fa-sort-asc fa-rotate-270" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+		    		                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information"><i class="fa fa-sort-desc fa-rotate-270" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
 		                            </span>
 		                            <span id="hide_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}" hidden aria-hidden="true">
-		    		                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Collapse to hide holds information"><i class="fa fa-sort-asc" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+		    		                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Collapse to hide holds information"><i class="fa fa-sort-desc" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
 		                            </span>
 								</div>
 							</div>
@@ -175,7 +175,7 @@
 			<span id="reg_resources_desc" class="sr-only">{{reg_next_quarter}} {{ reg_next_year }} plan</span>
             <div id="reg_resources{{#if card}}_{{card}}{{/if}}" aria-labelledby="reg_resources_desc" aria-expanded="false" class="slide-hide reg_resources_disc" style="clear:both;" aria-hidden="true">
                 <!-- data from MyPlan -->
-                <div>
+                <div class="myplan-data">
                     {{ #if plan_data.has_ready_courses }}
                     <div>
 		                <h4 class="quarter-heading">Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>
@@ -240,18 +240,18 @@
                     {{ /if }}
                 </div>
 				<div class="reg-resources">
-	                <h4 class="resources-heading">Resources</h4>
-	                {{ #if plan_data.courses }}
-	                <ul class="reg-resources-list">
-	                    <li><a href="http://myplan.uw.edu">Edit Plan in MyPlan</a> (Academic Planning)</li>
-	                    <li><a href="//uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Degree Audit Reporting System (DARS)</a></li>
+					{{ #if plan_data.courses }}
+	                <ul class="reg-resources-list no-header-space">
+	                    <li><a href="http://myplan.uw.edu">Edit Plan in MyPlan</a> </li>
+	                    <li><a href="//uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Audit your degree</a></li>
 	                </ul>
 	
 	                {{ else }}
+	                <h4 class="resources-heading">Resources</h4>
 	                <ul class="reg-resources-list">
 						<li><a href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a></li>
 	                    <li><a href="http://myplan.uw.edu">MyPlan</a> (Academic Planning)</li>
-	                    <li><a href="//uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Degree Audit Reporting System (DARS)</a></li>
+	                    <li><a href="//uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Audit your degree</a></li>
 	                </ul>
 					{{ /if }}
 				</div>
