@@ -85,7 +85,7 @@
 					            <a href="javascript:void(0)" aria-labelledby="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}"><i class="fa fa-sort-desc" aria-hidden="true"></i> Hide details</a>
 			                        </span>
 					    {{ else }}
-                                                <a style="margin-top:8px;" href="http://myplan.uw.edu">Add Sections</a>
+                                                <a style="margin-top:8px;" target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Add Sections</a>
 					    {{ /if}}
 				        </div>
 				    </div>
@@ -111,18 +111,18 @@
 			        </ul>
 
 			        <div class="pull-right edit-plan-link">
-				    <a title="Edit plan to fix issues" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit plan to fix issues</a>
+				    <a title="Edit plan to fix issues" target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit plan to fix issues</a>
 			        </div>
 			    </div>
 
 			    {{ #if registration_is_open }}
 			    <div class="reg-details-open">
 			        {{ #unless plan_data.ready_count }}
-			            <a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit plan to fix issues</a><br />
-			            <span class="reg-link">or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
+			            <a target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit plan to fix issues</a><br />
+			            <span class="reg-link">or enter SLNs on <a target="_blank" href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
 			        {{ else }}
-			            <a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Start registration through MyPlan</a><br />
-			            <span class="reg-link">or enter SLNs on <a href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
+			            <a target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Start registration through MyPlan</a><br />
+			            <span class="reg-link">or enter SLNs on <a target="_blank" href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
                                 {{ /unless }}
 			    </div>
 			    {{ /if}}
@@ -136,7 +136,7 @@
 				    <div class="pull-right">
 					<div class="card-badge-value">No courses in your plan</div>
 					<div style="text-align:right;">
-					    <a class="pull-right" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Add courses</a>
+					    <a class="pull-right" target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Add courses</a>
 					</div>
 				    </div>
 				</div>
@@ -145,7 +145,7 @@
 	                        <div class="reg-link">
 		                    <ul class="reg-resources-list">
 			                <li class="pull-right">
-                                            <a href="https://sdb.admin.uw.edu/students/uwnetid/register.asp">Registration</a>
+                                            <a target="_blank" href="https://sdb.admin.uw.edu/students/uwnetid/register.asp">Registration</a>
 			                </li>
 		                    </ul>
 	                        </div>
@@ -159,14 +159,14 @@
 	        <div class="pull-right">
 		    <ul class="reg-resources-list">
 			{{ #if is_tacoma }}
-			    <li class="pull-right time_schedule_link"><span id="tacoma_time_schedule" class="sr-only">Browse time schedule for Tacoma</span><a  aria-labelledby="tacoma_time_schedule" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule for Tacoma</a></li>
-                            <li class="pull-right"><a class="bold_text" href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
+			    <li class="pull-right time_schedule_link"><span id="tacoma_time_schedule" class="sr-only">Browse time schedule for Tacoma</span><a aria-labelledby="tacoma_time_schedule" target="_blank" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule for Tacoma</a></li>
+                            <li class="pull-right"><a class="bold_text" target="_blank" href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
 			{{ /if }}
 			{{ #if is_bothell }}
-                            <li><span id="bothell_time_schedule" class="sr-only">Browse time schedule for Bothell</span><a aria-labelledby="bothell_time_schedule" href="http://www.uwb.edu/registration/time">Browse time schedule for Bothell</a></li>
+                            <li><span id="bothell_time_schedule" class="sr-only">Browse time schedule for Bothell</span><a aria-labelledby="bothell_time_schedule" target="_blank" href="http://www.uwb.edu/registration/time">Browse time schedule for Bothell</a></li>
                         {{ /if }}
                         {{ #if is_seattle }}
-                            <li><span id="seattle_time_schedule" class="sr-only">Browse time schedule for Seattle</span><a aria-labelledby="seattle_time_schedule" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
+                            <li><span id="seattle_time_schedule" class="sr-only">Browse time schedule for Seattle</span><a aria-labelledby="seattle_time_schedule" target="_blank" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
                         {{ /if }}
                     </ul>
 		</div>
@@ -238,15 +238,15 @@
 		    <div class="reg-resources">
 			{{ #if plan_data.courses }}
 	                    <ul class="reg-resources-list no-header-space">
-	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit Plan in MyPlan</a> </li>
-	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/audit/degree">Check Your Degree Progress (DARS)</a></li>
+	                        <li><a target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit Plan in MyPlan</a> </li>
+	                        <li><a target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/audit/degree">Check Your Degree Progress (DARS)</a></li>
 	                    </ul>
 	                {{ else }}
 	                    <h4 class="resources-heading">Resources</h4>
 	                    <ul class="reg-resources-list">
-				<li><a href="https://sdb.admin.uw.edu/students/uwnetid/register.asp">Registration</a></li>
-	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">MyPlan</a> (Academic Planning)</li>
-	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/audit/degree">Check Your Degree Progress (DARS)</a></li>
+				<li><a target="_blank" href="https://sdb.admin.uw.edu/students/uwnetid/register.asp">Registration</a></li>
+	                        <li><a target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">MyPlan</a> (Academic Planning)</li>
+	                        <li><a target="_blank" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/audit/degree">Check Your Degree Progress (DARS)</a></li>
 	                    </ul>
                         {{ /if }}
 		    </div>
