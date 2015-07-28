@@ -6,282 +6,275 @@
         
             <h3>Registration: {{reg_next_quarter}} {{ reg_next_year }}</h3>
             <div class="card-badge-container">
-            <ul title="Registration Information" style="list-style-type: none; padding-left: 0;">
-	            {{ #if hold_count }}
-				<li>
-		            <div class="card-badge card-critical-alert " role="status">
-			            <div class="reg-holds-container clearfix">
-				            <div class="pull-left">
-				            	<h4 class="card-badge-label">Holds</h4>
-				            </div>
-							<div class="pull-right">  
-								<div class="card-badge-value">                  
-				                    <span class="sr-only">You have registration holds!</span>
-		                            <span id="show_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}">
-		    		                    <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information"><i class="fa fa-sort-desc fa-rotate-270" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
-		                            </span>
-		                            <span id="hide_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}" hidden aria-hidden="true">
-		    		                    <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Collapse to hide holds information"><i class="fa fa-sort-desc" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
-		                            </span>
-								</div>
-							</div>
-			                <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide reg_holds_disc" aria-hidden="true" style="text-align:left;">
-			                    <h4 class="sr-only">Registration holds</h4>
-			                    <div class="reg-holds">
-			                        <ul class="reg-holds-list">
-			                            {{ #each reg_holds }}
-			                             <li>{{{ notice_content }}}</li>
-			                            {{ /each }}
-			                        </ul>
-			                    </div>
-			                </div>
-			            </div>
-		            </div>
-				</li>    
-	            {{ /if }}
-            </ul> 
-            </div>           
+                <ul title="Registration Information" style="list-style-type: none; padding-left: 0;">
+                    {{ #if hold_count }}
+                    <li>
+                        <div class="card-badge card-critical-alert " role="status">
+                            <div class="reg-holds-container clearfix">
+                                <div class="pull-left">
+                                    <h4 class="card-badge-label">Holds</h4>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="card-badge-value">
+                                        <span class="sr-only">You have registration holds!</span>
+                                        <span id="show_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}">
+                                            <a id="show_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Expand to show holds information"><i class="fa fa-sort-desc fa-rotate-270" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+                                        </span>
+                                        <span id="hide_reg_holds_wrapper{{#if card}}_{{card}}{{/if}}" hidden aria-hidden="true">
+                                            <a id="hide_reg_holds{{#if card}}_{{card}}{{/if}}" class="reg_disclosure{{#if card}}_{{card}}{{/if}}" aria-controls="reg_holds" href="#" title="Collapse to hide holds information"><i class="fa fa-sort-desc" aria-hidden="true"></i> {{ hold_count }} {{ pluralize hold_count "hold" "holds" }}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="reg_holds{{#if card}}_{{card}}{{/if}}" class="slide-hide reg_holds_disc" aria-hidden="true" style="text-align:left;">
+                                    <h4 class="sr-only">Registration holds</h4>
+                                    <div class="reg-holds">
+                                        <ul class="reg-holds-list">
+                                            {{ #each reg_holds }}
+                                            <li>{{{ notice_content }}}</li>
+                                            {{ /each }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {{ /if }}
+                </ul>
+            </div>
             <!-- <h4 class="sr-only">Registration Information</h4> --> <!-- not sure if we need this h4 here -->    
-			
+
             <!--Estimated Registration Date-->
             <div class="card-badge-container">
-				<ul class="card_list">
-		            {{ #unless registration_is_open }}
-					<li>
-			            <div class="card-badge est-reg-date-container clearfix">
-			                <div class="est-reg-date" aria-labelledby="est_reg_date">
-			                    {{ #each est_reg_date }}
-				                    <span class="sr-only est_reg_date">Estimated Registration Date: {{{ toFriendlyDateVerbose date }}}</span>
-			                        <div class="pull-left" style="display:inline-block;">
-				                        <h4 class="card-badge-label">Est. Registration Date <!-- <br /><span class="" style="font-size:75%; font-weight:normal; font-style:italic;">(Estimated)</span>--> </h4>
-				                    </div> 
-			                        <div class="pull-right">
-				                        <div class="card-badge-value">{{{ toFriendlyDate date }}}<br/><span class="est-reg-time">at 6:00 AM</span></div>
-				                    </div>
-			                    {{ /each }}
-			                </div>
-			            </div>
-		            </li>
-		            {{ /unless }}
-	            
-					<li>
-		            {{ #if plan_data.courses }}
-			            <div id="reg_details" class="card-badge reg-details-container clearfix">
-				            <div class="reg-details">
-					            <div class="pull-left">
-						            <h4 class="card-badge-label">In <span style="font: 18px/normal 'museo-sans',Helvetica,Arial,Verdana,sans-serif;">MyPlan</h4>
-						        </div>
-					            <div class="pull-right">&nbsp;
-						            <div class="card-badge-value"><span class="course-ready">{{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready</span><br/>{{ #if plan_data.unready_count }} {{ plan_data.unready_count }} not ready
-						            </div>
-						            <div style="text-align:right;">
-						                {{ #if plan_data.has_sections }}
-			                                <span id="show_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}">
-						                	    <span class="sr-only" id="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}">See more details about unready courses</span>
-						                	    <a href="javascript:void(0)" aria-labelledby="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}"><i class="fa fa-sort-desc fa-rotate-270" aria-hidden="true"></i> Show details</a>
-			                                </span>
-			                                <span id="hide_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
-						                	    <span id="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Hide details for unready courses</span>
-						                	    <a href="javascript:void(0)" aria-labelledby="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}"><i class="fa fa-sort-desc" aria-hidden="true"></i> Hide details</a>
-			                                </span>
-						                {{ else }} <a style="margin-top:8px;" href="http://myplan.uw.edu">Add Sections</a>
-						                {{ /if}}
-						            {{ /if }}
-						            </div>
-					            </div>
-					        </div>
-			            </div>
-	            
-			            <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide course-not-ready-details">
-				            <h4 class="card-badge-label">Not ready for registration</h4>
-				            <ul id="courses_not_ready_list" class="courses-not-ready-list">
-				            {{ #each plan_data.courses }}
-				                {{ #unless registrations_available }}
-				                <li class="courses-not-ready-list-item">{{ curriculum_abbr }} {{ course_number }}</li> <!--{{ #unless @last }}<br />{{/unless}}-->
-				                {{ /unless }}
-				            {{ /each}}
-				            </ul>
-				            <div class="card-badge-label">Possible issues</div>
-				            <ul class="fa-ul courses-not-ready-issues">
-					            <li>Too many/too few sections selected for a course</li>
-					            <li>Time conflict with registered course</li>
-					            <li>Time conflict with a selected section</li>
-					            <li>Planned courses are jointly offered versions of one course</li>
-				            </ul>
-			
-				            <div class="pull-right edit-plan-link">
-					            <a title="Edit plan to fix issues" href="http://myplan.uw.edu">Edit plan to fix issues</a>
-				            </div>
-			            </div>
-						
-						{{ #if registration_is_open }}
-						<div class="reg-details-open">
-			                {{ #unless plan_data.ready_count }}
-			                	<a href="http://myplan.uw.edu">Edit plan to fix issues</a><br />
-			                <span class="reg-link">or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
-			                {{ else }}
-			                    <a href="http://myplan.uw.edu">Start registration through MyPlan</a><br />
-			                    <span class="reg-link">or enter SLNs on <a href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
-			                {{ /unless }}
-			            </div>
-			            {{ /if}}
-						
-			            {{ else }}
-			            <div id="reg_details" class="reg-details-closed-container clearfix">
-				            <div class="reg-details-closed">
-					            <div class="pull-left">
-				                	<h4 class="card-badge-label">In <span style="font: 18px/normal 'museo-sans',Helvetica,Arial,Verdana,sans-serif;">MyPlan</h4>
-								</div>
-								<div class="pull-right">
-									<div class="card-badge-value">No courses in your plan</div>
-									<div style="text-align:right;">
-										<a class="pull-right" href="http://myplan.uw.edu">Add courses</a>
-									</div>
-								</div>
-							</div>
-			            </div>
-			            	{{ #if registration_is_open }}
-	                    <div class="reg-link">
-		                    <ul class="reg-resources-list">
-			                    <li class="pull-right">
-	                        		<a href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a>
-			                    </li>
-		                    </ul>
-	                    </div>
-		                    {{ /if }}			            
-			            {{ /if }}
-					</li>
-				</ul>
-            </div>
-		            <h4 class="sr-only">Registration Resources</h4>
-		            {{ #unless registration_is_open }}
-					<div class="pull-right">
-			            <ul class="reg-resources-list">
-			                {{ #if is_tacoma }}
-			                    <li class="pull-right time_schedule_link"><span id="tacoma_time_schedule" class="sr-only">Browse time schedule for Tacoma</span><a  aria-labelledby="tacoma_time_schedule" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule for Tacoma</a></li>
-			                    <li class="pull-right"><a class="bold_text" href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
-			                {{ /if }}
-			                {{ #if is_bothell }}
-			                    <li><span id="bothell_time_schedule" class="sr-only">Browse time schedule for Bothell</span><a aria-labelledby="bothell_time_schedule" href="http://www.uwb.edu/registration/time">Browse time schedule for Bothell</a></li>
-			                {{ /if }}
-			                {{ #if is_seattle }}
-			                    <li><span id="seattle_time_schedule" class="sr-only">Browse time schedule for Seattle</span><a aria-labelledby="seattle_time_schedule" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
-			                {{ /if }}
-			            </ul>
+                <ul class="card_list">
+                    {{ #unless registration_is_open }}
+                    <li>
+                        <div class="card-badge est-reg-date-container clearfix">
+                            <div class="est-reg-date" aria-labelledby="est_reg_date">
+                                {{ #each est_reg_date }}
+                                <span class="sr-only est_reg_date">Estimated Registration Date: {{{ toFriendlyDateVerbose date }}}</span>
+                                <div class="pull-left" style="display:inline-block;">
+                                    <h4 class="card-badge-label">Est. Registration Date <!-- <br /><span class="" style="font-size:75%; font-weight:normal; font-style:italic;">(Estimated)</span>--> </h4>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="card-badge-value">{{{ toFriendlyDate date }}}<br/><span class="est-reg-time">at 6:00 AM</span></div>
+                                </div>
+                                {{ /each }}
+                            </div>
+                        </div>
+                    </li>
+                    {{ /unless }}
+
+                    <li>
+		        {{ #if plan_data.courses }}
+			    <div id="reg_details" class="card-badge reg-details-container clearfix">
+			        <div class="reg-details">
+				    <div class="pull-left">
+				        <h4 class="card-badge-label">In <span style="font: 18px/normal 'museo-sans',Helvetica,Arial,Verdana,sans-serif;">MyPlan</h4>
+				    </div>
+				    <div class="pull-right">&nbsp;
+				        <div class="card-badge-value"><span class="course-ready">{{ plan_data.ready_count }} {{ pluralize plan_data.ready_count "course" "courses" }} ready</span><br/>{{ #if plan_data.unready_count }} {{ plan_data.unready_count }} not ready
+				        </div>
+				        <div style="text-align:right;">
+					    {{ #if plan_data.has_sections }}
+			                        <span id="show_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}">
+					            <span class="sr-only" id="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}">See more details about unready courses</span>
+					            <a href="javascript:void(0)" aria-labelledby="show_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}"><i class="fa fa-sort-desc fa-rotate-270" aria-hidden="true"></i> Show details</a>
+			                        </span>
+			                        <span id="hide_unready_courses_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
+					            <span id="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Hide details for unready courses</span>
+					            <a href="javascript:void(0)" aria-labelledby="hide_unready_course_details_label{{# if card }}_{{card}}{{/if}}" class="myplan_unready_courses_disclosure{{# if card }}_{{card}}{{/if}}"><i class="fa fa-sort-desc" aria-hidden="true"></i> Hide details</a>
+			                        </span>
+					    {{ else }}
+                                                <a style="margin-top:8px;" href="http://myplan.uw.edu">Add Sections</a>
+					    {{ /if}}
+				        </div>
+				    </div>
+			        </div>
+			    </div>
+
+			    <div id="myplan_unready_courses{{# if card }}_{{card}}{{/if}}" class="slide-hide course-not-ready-details">
+			        <h4 class="card-badge-label">Not ready for registration</h4>
+			        <ul id="courses_not_ready_list" class="courses-not-ready-list">
+				    {{ #each plan_data.courses }}
+                                        {{ #unless registrations_available }}
+                                            <li class="courses-not-ready-list-item">{{ curriculum_abbr }} {{ course_number }}</li> <!--{{ #unless @last }}<br />{{/unless}}-->
+                                        {{ /unless }}
+				    {{ /each}}
+			        </ul>
+
+			        <div class="card-badge-label">Possible issues</div>
+			        <ul class="fa-ul courses-not-ready-issues">
+				    <li>Too many/too few sections selected for a course</li>
+				    <li>Time conflict with registered course</li>
+				    <li>Time conflict with a selected section</li>
+				    <li>Planned courses are jointly offered versions of one course</li>
+			        </ul>
+
+			        <div class="pull-right edit-plan-link">
+				    <a title="Edit plan to fix issues" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit plan to fix issues</a>
+			        </div>
+			    </div>
+
+			    {{ #if registration_is_open }}
+			    <div class="reg-details-open">
+			        {{ #unless plan_data.ready_count }}
+			            <a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit plan to fix issues</a><br />
+			            <span class="reg-link">or enter SLNs on <a href="https://sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
+			        {{ else }}
+			            <a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Start registration through MyPlan</a><br />
+			            <span class="reg-link">or enter SLNs on <a href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration screen</a></span>
+                                {{ /unless }}
+			    </div>
+			    {{ /if}}
+
+			{{ else }}
+			    <div id="reg_details" class="reg-details-closed-container clearfix">
+			        <div class="reg-details-closed">
+				    <div class="pull-left">
+				        <h4 class="card-badge-label">In <span style="font: 18px/normal 'museo-sans',Helvetica,Arial,Verdana,sans-serif;">MyPlan</h4>
+				    </div>
+				    <div class="pull-right">
+					<div class="card-badge-value">No courses in your plan</div>
+					<div style="text-align:right;">
+					    <a class="pull-right" href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Add courses</a>
 					</div>
-		            {{ /unless }}
-			
-			<!-- CHARLON: not sure why a clearfix wasn't working on the DIV below, but the inline style was... -->                                                                                                
-			<span id="reg_resources_desc" class="sr-only">{{reg_next_quarter}} {{ reg_next_year }} plan</span>
-            <div id="reg_resources{{#if card}}_{{card}}{{/if}}" aria-labelledby="reg_resources_desc" aria-expanded="false" class="slide-hide reg_resources_disc" style="clear:both;" aria-hidden="true">
-                <!-- data from MyPlan -->
-                <div class="myplan-data">
-                    {{ #if plan_data.has_ready_courses }}
-                    <div>
+				    </div>
+				</div>
+			    </div>
+			    {{ #if registration_is_open }}
+	                        <div class="reg-link">
+		                    <ul class="reg-resources-list">
+			                <li class="pull-right">
+                                            <a href="https://sdb.admin.uw.edu/students/uwnetid/register.asp">Registration</a>
+			                </li>
+		                    </ul>
+	                        </div>
+		            {{ /if }}
+                        {{ /if }}
+		    </li>
+		</ul>
+            </div>
+	    <h4 class="sr-only">Registration Resources</h4>
+	    {{ #unless registration_is_open }}
+	        <div class="pull-right">
+		    <ul class="reg-resources-list">
+			{{ #if is_tacoma }}
+			    <li class="pull-right time_schedule_link"><span id="tacoma_time_schedule" class="sr-only">Browse time schedule for Tacoma</span><a  aria-labelledby="tacoma_time_schedule" href="http://www.washington.edu/students/timeschd/T/">Browse time schedule for Tacoma</a></li>
+                            <li class="pull-right"><a class="bold_text" href="http://www.tacoma.washington.edu/enrollment_apps/timeschedule/search.cfm">Tacoma Time Schedule Quick Search</a></li>
+			{{ /if }}
+			{{ #if is_bothell }}
+                            <li><span id="bothell_time_schedule" class="sr-only">Browse time schedule for Bothell</span><a aria-labelledby="bothell_time_schedule" href="http://www.uwb.edu/registration/time">Browse time schedule for Bothell</a></li>
+                        {{ /if }}
+                        {{ #if is_seattle }}
+                            <li><span id="seattle_time_schedule" class="sr-only">Browse time schedule for Seattle</span><a aria-labelledby="seattle_time_schedule" href="http://www.washington.edu/students/timeschd/">Browse time schedule</a></li>
+                        {{ /if }}
+                    </ul>
+		</div>
+		{{ /unless }}
+
+		<!-- CHARLON: not sure why a clearfix wasn't working on the DIV below, but the inline style was... -->
+		<span id="reg_resources_desc" class="sr-only">{{reg_next_quarter}} {{ reg_next_year }} plan</span>
+                <div id="reg_resources{{#if card}}_{{card}}{{/if}}" aria-labelledby="reg_resources_desc" aria-expanded="false" class="slide-hide reg_resources_disc" style="clear:both;" aria-hidden="true">
+                    <!-- data from MyPlan -->
+                    <div class="myplan-data">
+                        {{ #if plan_data.has_ready_courses }}
+                            <div>
 		                <h4 class="quarter-heading">Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>
-	                    <div class="card-badge-label">Ready for registration</div>
-	
-	                    {{ #each plan_data.courses }} <!--Course-->
-	                    {{ #if registrations_available }}
-	                        {{ curriculum_abbr }} {{ course_number }}
-							<table class="reg-status-table table table-condensed borderless" style="border-width: 0;">
+	                        <div class="card-badge-label">Ready for registration</div>
+
+	                        {{ #each plan_data.courses }} <!--Course-->
+	                            {{ #if registrations_available }}
+	                                {{ curriculum_abbr }} {{ course_number }}
+				        <table class="reg-status-table table table-condensed borderless" style="border-width: 0;">
 			                    <thead class="sr-only">
-				                    <tr>
-					                    <td>Section</td>
-					                    <td>Day</td>
-					                    <td>Time</td>
-				                    </tr>
+				                <tr>
+					            <td>Section</td>
+					            <td>Day</td>
+					            <td>Time</td>
+				                </tr>
 			                    </thead>
-		                        <tbody>
-		                        {{ #each sections }} <!--Section-->
-			                        <tr class="reg-status-table-row">
+		                            <tbody>
+		                                {{ #each sections }} <!--Section-->
+			                            <tr class="reg-status-table-row">
 				                        <td>{{ section_id }}</td>
 				                        {{#each section_data.meetings}}
 				                            {{#if days_tbd }}
-				                            Days and times to be arranged<br/>
+				                                Days and times to be arranged<br/>
 				                            {{else}}
-			                            <td>
-			                                {{#if meeting_days.monday}}<abbr title="Monday">M</abbr>{{/if}}{{#if
-			                                meeting_days.tuesday}}<abbr title="Tuesday">T</abbr>{{/if}}{{#if
-			                                meeting_days.wednesday}}<abbr title="Wednesday">W</abbr>{{/if}}{{#if
-			                                meeting_days.thursday}}<abbr title="Thursday">Th</abbr>{{/if}}{{#if
-			                                meeting_days.friday}}<abbr title="Friday">F</abbr>{{/if}}{{#if
-			                                meeting_days.saturday}}<abbr title="Saturday">Sa</abbr>{{/if}}{{#if
-			                                meeting_days.sunday}}<abbr title="Sunday">Su</abbr>{{/if}}
-			                            </td>
-			                            <td>{{formatTime start_time}} - {{formatTimeAMPM end_time}}</td>
-			                        </tr>
-		                            	{{/if}}
-			                     
-		                        {{/each}}
-		                        
-		                        {{ /each }} <!--Section end-->
-		                        </tbody>
-		                    </table> 
-	                        {{/if}}
-	                    {{ /each }} <!--Course end-->
-                    </div>
-                    {{ /if }}
+			                                        <td>
+			                                            {{#if meeting_days.monday}}<abbr title="Monday">M</abbr>{{/if}}{{#if
+			                                            meeting_days.tuesday}}<abbr title="Tuesday">T</abbr>{{/if}}{{#if
+			                                            meeting_days.wednesday}}<abbr title="Wednesday">W</abbr>{{/if}}{{#if
+			                                            meeting_days.thursday}}<abbr title="Thursday">Th</abbr>{{/if}}{{#if
+			                                            meeting_days.friday}}<abbr title="Friday">F</abbr>{{/if}}{{#if
+			                                            meeting_days.saturday}}<abbr title="Saturday">Sa</abbr>{{/if}}{{#if
+			                                            meeting_days.sunday}}<abbr title="Sunday">Su</abbr>{{/if}}
+			                                        </td>
+                                                                <td>{{formatTime start_time}} - {{formatTimeAMPM end_time}}</td>
+                                                            {{/if}}
+                                                        {{/each}}
+                                                    </tr>
+                                                {{ /each }} <!--Section end-->
+		                            </tbody>
+		                        </table>
+	                            {{/if}}
+                                {{ /each }} <!--Course end-->
+                            </div>
+                        {{ /if }} <!-- has_ready_courses end-->
 
-                    
-                   
-                    
-                    {{ #if plan_data.has_unready_courses }}
-                    <div>
-	                {{# unless plan_data.has_ready_courses}}<h4 class="quarter-heading">Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>{{/unless}}
-	                
-	                    <div class="card-badge-label">Not ready for registration</div>
-	                    {{ #each plan_data.courses }}
-	                        {{ #unless registrations_available }}
-	                        {{ curriculum_abbr }} {{ course_number }} <br />
-	                        {{ /unless }}
-	                    {{ /each}}
+                        {{ #if plan_data.has_unready_courses }}
+                            <div>
+	                        {{# unless plan_data.has_ready_courses}}<h4 class="quarter-heading">Your {{reg_next_quarter}} {{ reg_next_year }} plan</h4>{{/unless}}
+	                            <div class="card-badge-label">Not ready for registration</div>
+	                                {{ #each plan_data.courses }}
+	                                    {{ #unless registrations_available }}
+	                                        {{ curriculum_abbr }} {{ course_number }} <br />
+	                                    {{ /unless }}
+	                                {{ /each}}
+                            </div>
+                        {{ /if }}
                     </div>
-                    {{ /if }}
-                </div>
-				<div class="reg-resources">
-					{{ #if plan_data.courses }}
-	                <ul class="reg-resources-list no-header-space">
-	                    <li><a href="http://myplan.uw.edu">Edit Plan in MyPlan</a> </li>
-	                    <li><a href="//uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Audit your degree</a></li>
-	                </ul>
-	
+
+		    <div class="reg-resources">
+			{{ #if plan_data.courses }}
+	                    <ul class="reg-resources-list no-header-space">
+	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">Edit Plan in MyPlan</a> </li>
+	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/audit/degree">Check Your Degree Progress (DARS)</a></li>
+	                    </ul>
 	                {{ else }}
-	                <h4 class="resources-heading">Resources</h4>
-	                <ul class="reg-resources-list">
-						<li><a href="//sdb.admin.washington.edu/students/uwnetid/register.asp">Registration</a></li>
-	                    <li><a href="http://myplan.uw.edu">MyPlan</a> (Academic Planning)</li>
-	                    <li><a href="//uwstudent.washington.edu/student/myplan/audit?methodToCall=audit&viewId=DegreeAudit-FormView">Audit your degree</a></li>
-	                </ul>
-					{{ /if }}
-				</div>
+	                    <h4 class="resources-heading">Resources</h4>
+	                    <ul class="reg-resources-list">
+				<li><a href="https://sdb.admin.uw.edu/students/uwnetid/register.asp">Registration</a></li>
+	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/">MyPlan</a> (Academic Planning)</li>
+	                        <li><a href="https://uwstudent.washington.edu/student/myplan/mplogin/netid?rd=/student/myplan/audit/degree">Check Your Degree Progress (DARS)</a></li>
+	                    </ul>
+                        {{ /if }}
+		    </div>
             </div>
-            
+
             <div class="card-disclosure">
                 {{ #if plan_data.courses }}
-                <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
-                    <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
-                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show {{reg_next_quarter}} {{ reg_next_year }} plan</a>
-                </span>
-                <span id="hide_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
-                    <span id="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Collapse to hide additional registration resources</span>
-                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Collapse to hide additional registration resources">Hide {{reg_next_quarter}} {{ reg_next_year }} plan</a>
-                </span>
+                    <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
+                        <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
+                        <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show {{reg_next_quarter}} {{ reg_next_year }} plan</a>
+                    </span>
+                    <span id="hide_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
+                        <span id="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Collapse to hide additional registration resources</span>
+                        <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Collapse to hide additional registration resources">Hide {{reg_next_quarter}} {{ reg_next_year }} plan</a>
+                    </span>
 
                 {{ else }}
-                <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
-                    <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
-                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show more</a>
-                </span>
-                <span id="hide_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
-                    <span id="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Collapse to hide additional registration resources</span>
-                    <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Collapse to hide additional registration resources">Show less</a>
-                </span>
-
+                    <span id="show_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}">
+                        <span id="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Expand to show additional registration resources</span>
+                        <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="show_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Expand to show additional registration resources">Show more</a>
+                    </span>
+                    <span id="hide_reg_resources_wrapper{{# if card }}_{{card}}{{/if}}" hidden aria-hidden="true">
+                        <span id="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" class="sr-only">Collapse to hide additional registration resources</span>
+                        <a class="show_reg_resources{{# if card }}_{{card}}{{/if}}" aria-controls="reg_resources" aria-labelledby="hide_plan_reg_resources_label{{# if card }}_{{card}}{{/if}}" href="#" title="Collapse to hide additional registration resources">Show less</a>
+                    </span>
 
                 {{ /if }}
             </div>
-        
         </div>
     </div>
 

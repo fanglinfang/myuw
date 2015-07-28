@@ -35,6 +35,8 @@ border-color: @border;}
 @medium: ~"screen and (min-width: 768px)";
 @large: ~"screen and (min-width: 1024px)";
 
+
+/*** fonts ***/
 @font-face {
     font-family: 'encode_sans_normalsemibold';
     src: url('../fonts/encodesansnormal-600-semibold-webfont.eot');
@@ -583,38 +585,123 @@ body {
 	.simplesquare {display: inline-block; height: .9em; width: .9em; margin-right: 0.3em;}
 
 
+
+	// --- NEW STUDENT CHECKLIST CARDS --- //
+
+
+		// Thank You (New Student Checklist) //
+		#ThankYouCard {
+			h3 {margin-bottom: 25px;}
+			.notice-title {display:none;}
+			.card {background-color: #FDFFF7;}
+		}
+
+
+		// To Register For Classes (New Student Checklist) //
+		#ToRegisterCard {
+			.card {
+				h3 {margin-bottom: 25px;}
+				.card_list {margin-top: 10px; margin-bottom: 15px; line-height: 25px;}
+				.notice-title { display: block; font-weight: bold; margin-bottom: 2px; font-size: 1.1em;}
+				.notice-content { padding-bottom: 2em;}
+				.notice-body-with-title {display: inline-block;  margin-top: -1em;}
+
+				// pre
+				div.pre, div.post { margin-left: 2.2em;}
+				// .pre .notice-title {float:left; width: 90%;}
+				// .pre .notice-body-with-title {float:left; width: 90%;}
+				// post - NO TITLES
+				// .post .notice-body-with-title {float:left; width: 90%; margin-top: 0;}
+				// .post .notice-body-with-title {margin-left: 2.2em;  margin-top: -1.5em; display:inline-block;}
+				// .post .notice-body-without-title {margin-left: 2.2em;  margin-top: -1.5em; display:inline-block;}
+				// .post .non-notice-body-without-title {margin-left: 2.2em;  margin-top: -1.5em; display:inline-block;}
+
+				i {font-size: 1.5em;  vertical-align: middle;  margin-right: .5em; float:left; color:green; font-weight:400;}
+				i.pre {color:#3D3D3D;}
+				// strong {font-weight:400;}
+			}
+		}
+
+
+		// Critical Summer Reg & Early Fall Start  (New Student Checklist) //
+
+		div#EarlyFallStart {padding-top: 25px;}
+		#EarlyFallStart {
+			h3 {margin-bottom: 6px;}
+			.notice-title {display:none;}
+			// adding this display inline-block to adjust for &nbsp; that is in front of body text
+			.notice-body-with-title {display: inline-block;  margin-top: -1em; margin-bottom: 2em;}
+			.non-notice-body-with-title {display: inline-block; margin-top: .4em; margin-bottom: 2em;}
+		}
+
+
+		// Update Critical Information (New Student Checklist) //
+
+		#UpdateCriticalInfo {
+			h3 {margin-bottom: 25px;}
+			.notice-title { display: block; font-weight: bold; margin-bottom: 2px; font-size: 1.1em;}
+			.notice-content { padding-bottom: 2em;}
+			.notice-body-with-title {display: inline-block;  margin-top: -1.5em;}
+			.non-notice-body-with-title {display: inline-block;}
+		}
+
+
+		// International Student Resources (New Student Checklist) //
+
+		div#IntStud {padding-top: 25px;}
+		#IntStud {
+			h3 {margin-bottom: 6px;}
+			.notice-title {display:none;}
+			.notice-body-with-title {display: inline-block; margin-top: -1em; margin-bottom: 2em;}
+		}
+
+
+	    // Checklist items on SU registration card   (New Student Checklist) //
+
+	    #SummerRegStatusCardA, #SummerRegStatusCard1 {
+			.notice-title {display:none;}
+			.notice-content { padding-bottom: 1.5em;}
+			strong {font-weight:400;}
+			// adding this display inline-block to adjust for &nbsp; that is in front of body text
+			.notice-body-with-title {display: inline-block;  margin-top: -1em;}
+		}
+
+	// --- END NEW STUDENT CHECKLIST CARDS ---
+
+
+
     // registration card
-    
-    #RegStatusCard, #SummerRegStatusCardA, #SummerRegStatusCard1 {     
-        
-        .card-badge-container {    
-	        .card-critical-alert {    	        
+
+    #RegStatusCard, #SummerRegStatusCardA, #SummerRegStatusCard1 {
+
+        .card-badge-container {
+	        .card-critical-alert {
 		        .reg-holds-container {
 			        .card-badge-label {line-height: 0px;}
 			        .card-badge-value {font-size: inherit; font-weight: bold; line-height: 20px;
 				        a {text-decoration: none;}
 			        }
 			        .reg_holds_disc {background: rgba(255, 140, 138, 0.16);
-				        .reg-holds { 
+				        .reg-holds {
 					        padding: 8px;
 					        margin-top: 8px;
-				        
+
 					        .reg-holds-list { list-style: none; padding: 0; /*margin-top: 1em;*/ color:#913f16;
 						        a {color:#4d66ca; text-decoration: none;}
-						        
+
 						        ul { margin-top:5px;
 					            	li { margin-bottom: 1em; }
 					            }
-					            	
+
 					        	li { margin-bottom: 1em; }
 					        }
 						}
 					}
 		        }
 	        }
-	        
+
 	        .est-reg-date-container {
-	        	.est-reg-date { margin-bottom: 20px; 
+                .est-reg-date { margin-bottom: 20px;
 		        	.card-badge-label {line-height: 18px; margin-top: 0px;}
 					.card-badge-value {line-height: 18px; font-size: 16px; 
 						.est-reg-time {font-size: 75%;font-weight:normal;}
@@ -656,7 +743,7 @@ body {
 	        }
 	        .reg-link {margin-top:10px;}
 	    }
-	    
+
 	    .reg_resources_disc {
 		    h4 {font-weight:500; margin-bottom: 3px;}
 		    .card-badge-label {padding-bottom:5px;}
@@ -670,37 +757,53 @@ body {
 			   	.no-header-space {padding-top:10px;}
 			}
 	    }
-	    
+
 	    .reg-resources-list { list-style: none; padding-left: 0; }
-        
-        .reg-notice-list { list-style: none; padding: 5px 0; 
-             
+
+        .reg-notice-list { list-style: none; padding: 5px 0;
+
             li { margin-bottom: 1em; }
         }
-        
-        
-        .notice-list { margin-top: 5px; margin-bottom: 10px; list-style: disc; 
-            
+
+        .notice-list { margin-top: 5px; margin-bottom: 10px; list-style: disc;
             li { margin-bottom: 0;}
         }
-        
-        .notice-title { display: block; font-weight: bold; margin-bottom: 2px; }
-        
-    }
-    
-    // course cards
-    
-    #CourseCard {
-    
-        .card {
 
-            h4 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: @darktan; margin-bottom: 1em; 
+        .notice-title { display: block; font-weight: bold; margin-bottom: 2px; }
+    }
+
+    // course cards
+    #CourseCard {
+        .card {
+            h4 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: @darktan; margin-bottom: 1em;
                 .shortTitle { font-family: 'Roboto', sans-serif; font-weight: 400; color: #444 !important; font-size: 16px !important; margin-top: 5px; }
             }
 
-            h5 { font-family: 'Roboto', sans-serif; font-weight: 400; color: @darktan; margin-top: 1.5em; margin-bottom: .5em; font-size: 16px;  }
-            
-        
+            h5 { font-family: 'Roboto', sans-serif; font-weight: 500; color: @darktan; margin-top: 1.5em; margin-bottom: .5em; font-size: 16px;  }
+
+            .myuw-course-eval {
+	            h5 {margin-bottom: .2em;}
+	            .eval-related-messages {margin-top:0; margin-bottom: 1em; font-size: 12px;}
+	            .myuw-eval-list {list-style: none; padding-left:0px;
+		            .myuw-eval-list-item {line-height: normal; margin-bottom:8px; padding: 3px 0;
+			            .myuw-eval-link {font-size:110%;
+				            .myuw-eval-name {font-weight: normal;}
+			            }
+			            .myuw-eval-title {font-style: italic;font-size:95%;}
+		            }
+	            }
+	            .myuw-eval-multi-list {list-style: none; font-size:80%;padding-left:10px;padding-top:10px;
+		            .myuw-eval-multi-list-item {padding: 0 0 10px 0;line-height:normal;
+			            .myuw-eval-name {}
+			            .myuw-eval-title {font-style:italic;}
+		            }
+	            }
+	            .myuw-eval-multi-link {
+				            .myuw-eval-name {font-size:110%;}
+			            }
+	            .myuw-eval-close-date {font-weight: bold;}
+            }
+
 			.instructor-container {list-style-type: none; padding: 0; margin-bottom: 1em;
 
 				.contact-info-container { line-height: 23px; }
@@ -711,58 +814,55 @@ body {
 			}
 
 			.table {
-				margin-top: -5px;	
+				margin-top: -5px;
 				margin-bottom: 0;
 			}
         }
     }
-    
+
     // future quarter cards
-    
+
     #FutureQuarterCardA, #FutureQuarterCard1 {
         .card {
-            
             h4 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: @darktan; }
-            
+
             // make h5 look like h4
             h5 { font-size: 20px; color: #555; }
-            
-			.destination-arrow { position:absolute; top: 50%; right: 0; margin-top:-25px; 
+
+			.destination-arrow { position:absolute; top: 50%; right: 0; margin-top:-25px;
                 .future-quarter-card { display:inline-block; width:50px; line-height: 50px; text-align:center; color:#4d66ca; }
             }
-            
+
             p {
 	            span{ display: block; }
             }
-            
+
             // handle :hover for mobile touch devices
             .hover:hover { background: lighten(#4d66ca, 42%); }
         }
 
     }
-    
+
     // future quarter card overrides
-    #FutureQuarterCardA { 
+    #FutureQuarterCardA {
         .card {
             h4 { }
         }
     }
-    
-    #FutureQuarterCard1 { 
+
+    #FutureQuarterCard1 {
         .card {
-            
         }
     }
 
     // textbook card
     #TextbookCard {
-        
+
         .card {
-            
-            h3 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: @darktan; 
+            h3 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: @darktan;
                 .shortTitle { font-family: 'Roboto', sans-serif; font-weight: 400; color: #444 !important; font-size: 16px !important; margin-top: 5px; display: block; }
             }
-            
+
             .textbooks-list {
 	            .textbooks-list-item { //font-size:13px;
 		            .simplesquare {display: inline-block; height: .9em; width: .9em; margin-right: 0.3em;}
@@ -771,34 +871,27 @@ body {
 		            .textbooks-course-required {font-size:12px;font-style: italic;}
 	            }
             }
-            
-            .destination-arrow { position:absolute; top: 50%; right: 0; margin-top:-14px; 
+
+            .destination-arrow { position:absolute; top: 50%; right: 0; margin-top:-14px;
                 .show_textbooks { display:inline-block; width:40px; line-height: 40px; text-align:center; color:#777; }
             }
-            
         }
      }
-     
+
      // HFS card
-     
      #HFSCard {
-         
          .card-badge { margin-bottom: 15px; }
      }
-     
-     
+
      // Library Card
      #LibraryCard {
-         
          .card-noncritical-alert {
-             
              a { padding-left: 0; color: #4d66ca; }
          }
      }
-     
+
     // Events Card
     #EventsCard {
-	    
 	    .card {
 		    .myuw-events {
 			    .myuw-events-info {font-style: italic;font-size: 80%;margin-top:-5px; padding-bottom:5px}
@@ -811,7 +904,7 @@ body {
 					    .myuw-events-location {font-size:12px; color:#777;padding-top:5px;}
 				    }
 				}
-				#events_card_more {					
+				#events_card_more {
 			    }
 			    .myuw-events-calendar-link {
 				    .myuw-events-cal-list {padding-top: 5px; line-height: 1.6em; list-style-type: circle;
@@ -824,32 +917,25 @@ body {
 				    }
 			    }
 		    }
-		    
 	    }
-	    
     }
-     
-     
+
     // Academic Card
     #AcademicCard {
-        
         h3 { margin-bottom: 25px; }
-        h4 { color: #85754d; }        
+        h4 { color: #85754d; }
 
         .class-standing {
             h4 { text-transform: uppercase; font-weight: normal; color: gray; margin-bottom: 3px; }
             p, li { font-weight: bold; }
         }
-        
         ul { list-style: none; padding-left: 0; }
     }
-          
+
     // visual schedule
-    
     .hour-marker {border-top:1px solid #707070; width:100%;}
     .halfhour-marker {border-top:1px dashed #707070; width:100%;}
-    
-    
+
     .visual-schedule {
       width: 100% ;
       position: relative;
@@ -876,7 +962,6 @@ body {
     .six-hour .exam-time-bar {
       top: 14%;
     }
-    
     .twelve-hour .exam-time-bar {
       //top: 9.5%;
     }
@@ -918,7 +1003,6 @@ body {
       height: 93%;
       top: 8%;
     }
-    
     .five-day {
       width: 18.4%;
       height: 100%;
@@ -962,7 +1046,6 @@ body {
     /*
     .six-day:last-child, .five-day:last-child {
     	border-right: none;
-    
     }*/
     .six-day:first-child,
     seven-day:first-child,
@@ -1058,9 +1141,7 @@ body {
       color: #3c3c3c;
       top: 0px;
     }
-    
     #final_exam_schedule_card .six-hour .day-label { height: 14%; }
-    
     .visual-course {
       width: 100%;
       display: table;
@@ -1088,89 +1169,72 @@ body {
     	color: #555;
     	text-align: center;
     	white-space: nowrap;
-    	a { 
-    			color: #4d66ca;
+        a {
+           color: #4d66ca;
     	}
     }
-    
     .show_section_details {
       font-size: 12px;
       color: #f8f7f0;
     }
 
-    // course TBD 
-    
+    // course TBD
     .courseTBD { width: 100%; overflow: auto; margin: 15px 0;
-        
         h6 { font-size: 14px; }
-        .course-box { background: #e8e3d3; width: 50px; height: 40px; font-size:11px; margin-right:5px; line-height:.9em; } 
+        .course-box { background: #e8e3d3; width: 50px; height: 40px; font-size:11px; margin-right:5px; line-height:.9em; }
         .course-info { text-align:center; color:#fff; padding:2px; }
     }
-    
-    // error container 
+    // error container
     .error-container {
         h1 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small;  }
     }
-    
-    
+
     // textbooks page
-    
     .textbooks-container {
-		color: #555;        
+		color: #555;
 		background-color: #fff;
 		margin-bottom: -3em;
 		padding-bottom: 3em;
-		
 		h2 { font-family: 'encode_sans_normalbold'; color: #444; font-size: @font-header-small;  }
 		h3 { font-family: 'Roboto', sans-serif; font-weight: 400; font-size: 16px; line-height: 30px; margin: 0; color: #222; }
-		h4 { font-family: 'Open Sans', sans-serif; font-size: 14px; 
+		h4 { font-family: 'Open Sans', sans-serif; font-size: 14px;
     		span { text-transform: uppercase; font-size: 11px; }
 		}
-		
 		.book-cover, .no-book-cover { margin-right: 10px; }
-		
 		.no-book-cover { width:80px; height: 127px; border:solid 1px #ddd; padding: 20px 10px; color: #777; text-align: center; }
-		
-		.dl-books { font-size: 13px; 
-    		
+		.dl-books { font-size: 13px;
     		dt { color: #444; text-transform: uppercase; font-size: 12px; }
     		dd { color: #222; margin-bottom: 7px; }
 		}
-		
     }
-    
-    
+
     // categories (resources) page
-    
     .category-container {
-		color: #444;    
+		color: #444;
 		margin-bottom: -3em;
 		padding-bottom: 3em;
 		background-color: #fff;
-		        
+
         // category content
-        .category-content { 
+        .category-content {
             .category-links { padding-left: 0; list-style: none; }
         }
-        
         h1 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; }
-        h2 { font-family: 'Roboto', sans-serif; font-weight: 400; font-size: 16px; } 
+        h2 { font-family: 'Roboto', sans-serif; font-weight: 400; font-size: 16px; }
     }
+
     // future quarters page
-    
     .future-quarter-container {
 		margin-bottom: -3em;
 		padding-bottom: 3em;
-        
         h2 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; }
-        
         .shortTitle { font-family: 'Roboto', sans-serif; font-weight: 400; color: #444 !important; font-size: 16px !important; margin-top: 5px; display: block; }
     }
-	    
+
 	//notices page 
-	
-	.notices-container { 
-		color: #555;    
+
+	.notices-container {
+		color: #555;
 		background-color: #fff;
 		margin-bottom: -3em;
 		padding-bottom: 3em;
@@ -1178,115 +1242,93 @@ body {
 		h1 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: #444; }
 		h2 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; margin-top: 10px; }
         h3 { color: #333; margin-top: 0; margin-bottom:0; font-family: 'Roboto', sans-serif; font-weight: 400; }
-        
 		.notice-count { }
-
 		.notice-header-metadata { font-size: 12px; margin-top: -8px; color: #666; }
 		.notice-accordian { margin: 20px 0; }
-		
 		.disclosure:last-of-type { border-bottom: 1px solid #ddd; }
 		.disclosure { border-top: 1px solid #ddd;
-			
-			.disclosure-heading { 
-	            background: none;  
+			.disclosure-heading {
+	            background: none;
     	       	color: #555;
                 position: relative;
-    	       	
     	       	a { display: block; position: relative; z-index: 900; height: 80px;
         	       	.disclosure-title { position: absolute; top: 0; width: 100%; line-height: 80px; }
     	       	}
-    	       	
     	       	.disclosure-meta {  position: absolute; top: 50%; left: 0; right: 0; z-index: 1; line-height: 30px; margin-top: -13px;
-        	       	
         	       	.disclosure-unread { background-color: #555555; font-weight: 300; font-size:1em; position: absolute; right: 25px; top: 4px; z-index: 9999; }
         	       	.badge { background-color: white; color:#444; font-weight:normal; border:1px solid #444;}
         	       	.disclosure-critical { position: absolute; bottom: -23px; color: #777; font-size: 12px; }
     	       	}
     	    }
-    	    
     	    .disclosure-heading-critical {
-    			
     			h3 { color: #af4b1a; }
-    			
     			a {
-        		    .disclosure-title { }	
+                          .disclosure-title { }
     			}
-    			
-    			.disclosure-meta { 
-        			.disclosure-unread { background-color: #af4b1a; }
+                        .disclosure-meta {
+                        .disclosure-unread { background-color: #af4b1a; }
         			.badge {background-color: white; color: #af4b1a; border: 1px solid #af4b1a;}
         			i {color: #af4b1a;}
                 }
     	    }
-    	    
     	    .disclosure-content {
         	    padding: 0 15px 15px 15px;
-        	    margin: 0px;  
+                    margin: 0px;
         	    .notices_list {
 	        	    list-style: none;
 	        	    padding-left: 0;
-        	    } 
+                            }
     	    }
-
 		}
-		
 	    .notice-container {
 
 	        .critical-icon {
 		        display: inline;
 				float:right;
-				color: #af4b1a; 
+				color: #af4b1a;
 				margin-left:-15px;
 			}
 	    }
-	    
 	    .inner-notice-container {
 			margin: 15px -4px;
 			padding: 9px 9px;
-			border-top: 1px dotted #bbb; 
+			border-top: 1px dotted #bbb;
 			.notice-new {padding:0 5px; background:#f5d300; float:right; border-radius: 4px; margin-right:20px;}
 	    }
-	
+
         // - class for read notices
         .unread-notice { }
 
-	    .notice-category { font-size: 12px; color: #777; display: block; margin-bottom: 5px; } 
+	    .notice-category { font-size: 12px; color: #777; display: block; margin-bottom: 5px; }
 	    
-	    .notice-content { font-weight: normal; 
-	        
+	    .notice-content { font-weight: normal;
 	        .notice-title {  color: #222; font-weight: bold; display: block; margin-bottom: 2px; }
 	        .notice-body-with-title { color: #444; }
 	        .notice-body-without-title { }
 	        .notice-list { margin-top: 5px; }
 	    }
-	        
-	    .hold-container { 
+	    .hold-container {
 	        padding: 5px 0 5px 30px;
 	    }
-		
 		.toggle {
 			float: right;
-			display:inline-block; 
+			display:inline-block;
 		}
-		
 		// handle quarter begins in notices
 		.quarter_begins { color: #222 !important; text-align: center; padding: 0px;
-		
 		    .inner-notice-container { padding: 20px 0; }
     		.notice-category { color: inherit; display: none; }
     		.notice-title { color: inherit; }
     		.notice-body-with-title { color: inherit;  }
 	        .notice-body-without-title { color: inherit;  }
-	
 		}
 	}
-	
+
 	// academic calendar page
-	
 	.academic_cal-container {
 		.container {
 			h2 { font-family: 'encode_sans_normalbold'; font-size: @font-header-small; color: #444; }
-			.acal-page-filters { padding:10px 0;margin-bottom:15px;margin-top:15px; 
+			.acal-page-filters { padding:10px 0;margin-bottom:15px;margin-top:15px;
 				#myuw-event-filter-breaks, #myuw-event-filter-all, #myuw-event-filter-classes {font-size:15px;}
 				.myuw-selected-button {color: #fff; background-color:#4f318c;border-color: #4f318c;}
 			}
@@ -1296,43 +1338,33 @@ body {
 				.acal-page-event-list { list-style-type: none;padding-left: 0;
 					.acal-page-event-list-item { margin-bottom:10px;
 						.acal-page-event-date {}
-						.acal-page-event-title {margin: 0; width: 99%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}						
+						.acal-page-event-title {margin: 0; width: 99%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 					}
 				}
 			}
 		}
 	}
 
-
-
 /*** footer ***/
 
 #app_footer { background: darken(@lighttan, 5%); margin-top: 10px; padding-top: 15px;
-    
+
     // navigation bar
     .navigation-bar { margin-bottom: 10px;
-        
         .navigation-list {  list-style:none; padding-left:0; margin:0;
-            
             li {  width: 49%; margin-right: 2%; margin-bottom: 2%; height: 100px; background:@lighttan; }
-            
             li:nth-child(even) { margin-right: 0; }
-    
             .navigation-item { display: inline-block; position: relative; padding: 5px; height: 100px; width: 100%;
-                                    
-                .navigation-item-text { font-family: 'Roboto', sans-serif; font-weight: 400; font-family: 'encode_sans_normalsemibold'; color: #555; font-size: @font-base;  }                
+                .navigation-item-text { font-family: 'Roboto', sans-serif; font-weight: 400; font-family: 'encode_sans_normalsemibold'; color: #555; font-size: @font-base;  }
             }
-            
             // handle :hover state as mobile touch
             .hover:hover { background: darken(@lighttan, 20%); }
         }
-        
     }
-    
+
     // footer bar
-    .footer-bar { background:#333; padding: 10px 0; 
-        
-        .footer-links { color: #aaa; font-size: 11px; 
+    .footer-bar { background:#333; padding: 10px 0;
+        .footer-links { color: #aaa; font-size: 11px;
         	a {color: #fff}
             ul { padding: 0; margin-bottom: .5em; line-height: 11px; list-style: none;
                 li { display: inline-block; padding-right: 5px; margin-right: 3px; border-right: solid 1px #aaa; color: #222; }
@@ -1348,7 +1380,7 @@ body {
 // animated hide div
 .slide-hide {
    max-height: 0;
-   overflow: hidden; 
+   overflow: hidden;
    -webkit-transition: max-height 0.8s;
    -moz-transition: max-height 0.8s;
    transition: max-height 0.8s;
@@ -1361,17 +1393,13 @@ body {
 
 /*** development helpers ***/
 
-.todo { color: red !important; 
-    
+.todo { color: red !important;
     a { color: red !important; text-decoration: underline;}
 }
-
-
 
 /*** bootstrap overrides ***/
 
 .container {
-    
     // make margins auto at 768px
      @media @medium {
         margin-left: auto; margin-right: auto;
@@ -1381,20 +1409,18 @@ body {
 
 // grid gutters (10px)
 
-.row { margin-left: -5px; margin-right: -5px; 
-    [class*="col-"] { padding-left: 5px; padding-right: 5px; }    
+.row { margin-left: -5px; margin-right: -5px;
+    [class*="col-"] { padding-left: 5px; padding-right: 5px; }
 }
 
 
 // fade in effect
 
 .fade-in {
-    
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */
     -webkit-animation: fadein 2s; /* Safari and Chrome */
     -o-animation: fadein 2s; /* Opera */
-    
 }
 
 @keyframes fadein {
