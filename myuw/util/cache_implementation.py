@@ -1,7 +1,8 @@
-from restclients.cache_implementation import TimedCache
+from restclients.cache_implementation import TimedCache, MemcachedCache
 import re
 
 FOUR_HOURS = 60 * 60 * 4
+FIVE_SECONDS = 5
 ONE_MONTH = 60 * 60 * 24 * 30
 
 
@@ -27,3 +28,19 @@ class MyUWCache(TimedCache):
 
     def processResponse(self, service, url, response):
         return self._process_response(service, url, response)
+
+
+class MyUWMemcachedCache(MemcachedCache):
+    def _get_time(self, service, url):
+        if "sws" == service:
+            if re.match('^/student/v5/term', url):
+                return ONE_MONTH
+            return self._default()
+
+        elif "myplan" == "service":
+            return FIVE_SECONDS
+
+        return self._default()
+
+    def _default(self):
+        return FOUR_HOURS
