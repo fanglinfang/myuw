@@ -10,40 +10,37 @@ ONE_DAY = 60 * 60 * 24
 ONE_WEEK = 60 * 60 * 24 * 7
 
 
+def get_myuw_sws_cache_time(url):
+    if re.match('^/student/v5/term/current', url):
+        return ONE_DAY
+
+    if re.match('^/student/v5/term', url):
+        return ONE_WEEK
+
+    if re.match('^/student/v5/course', url) or\
+            re.match('^/student/v5/enrollment', url) or\
+            re.match('^/student/v5/notice', url):
+        return ONE_HOUR
+
+    if re.match('^/student/v5/registration', url):
+        return FIFTEEN_MINS
+
+    # person, AccountBalance
+    return FOUR_HOURS
+
+
 class MyUWCache(TimedCache):
 
     def getCache(self, service, url, headers):
         if "myplan" == service:
-            return self._get_from_cache(
+            return self._response_from_cache(
                 service, url, headers, FIVE_SECONDS)
 
         if "sws" == service:
-            return self._get_from_cache(
-                service, url, headers, self._get_sws_cache_time(url))
+            return self._response_from_cache(
+                service, url, headers, get_myuw_sws_cache_time(url))
 
-        return self._get_from_cache(service, url, headers, FOUR_HOURS)
-
-    def _get_from_cache(self, service, url, headers, max_age_in_seconds):
-        return self._response_from_cache(
-            service, url, headers, max_age_in_seconds)
-
-    def _get_sws_cache_time(self, url):
-        if re.match('^/student/v5/term/current', url):
-            return ONE_DAY
-
-        if re.match('^/student/v5/term', url):
-            return ONE_WEEK
-
-        if re.match('^/student/v5/course', url) or\
-                re.match('^/student/v5/enrollment', url) or\
-                re.match('^/student/v5/notice', url):
-            return ONE_HOUR
-
-        if re.match('^/student/v5/registration', url):
-            return FIFTEEN_MINS
-
-        # person, AccountBalance
-        return FOUR_HOURS
+        return self._response_from_cache(service, url, headers, FOUR_HOURS)
 
     def processResponse(self, service, url, response):
         return self._process_response(service, url, response)
