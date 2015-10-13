@@ -1,7 +1,8 @@
-from restclients.cache_implementation import TimedCache
 import re
+from restclients.cache_implementation import TimedCache
 
 
+FIVE_SECONDS = 5
 FIFTEEN_MINS = 60 * 15
 ONE_HOUR = 60 * 60
 FOUR_HOURS = 60 * 60 * 4
@@ -13,52 +14,36 @@ class MyUWCache(TimedCache):
 
     def getCache(self, service, url, headers):
         if "myplan" == service:
-            return self._NoCache(url, headers)
+            return self._get_from_cache(
+                service, url, headers, FIVE_SECONDS)
 
         if "sws" == service:
-            return self._getSWScache(url, headers)
+            return self._get_from_cache(
+                service, url, headers, self._get_sws_cache_time(url))
 
-        return self._FourHourCache(service, url, headers)
+        return self._get_from_cache(service, url, headers, FOUR_HOURS)
 
-    def _NoCache(self, url, headers):
-        return None
+    def _get_from_cache(self, service, url, headers, max_age_in_seconds):
+        return self._response_from_cache(
+            service, url, headers, max_age_in_seconds)
 
-    def _FifteenMinCache(self, service, url, headers):
-        return self._response_from_cache(service, url, headers, FIFTEEN_MINS)
-
-    def _FourHourCache(self, service, url, headers):
-        return self._response_from_cache(service, url, headers, FOUR_HOURS)
-
-    def _OneHourCache(self, service, url, headers):
-        return self._response_from_cache(service, url, headers, ONE_HOUR)
-
-    def _OneDayCache(self, service, url, headers):
-        return self._response_from_cache(service, url, headers, ONE_DAY)
-
-    def _OneWeekCache(self, service, url, headers):
-        return self._response_from_cache(service, url, headers, ONE_WEEK)
-
-    def _getSWScache(self, url, headers):
+    def _get_sws_cache_time(self, url):
         if re.match('^/student/v5/term/current', url):
-            return self._OneDayCache('sws', url, headers)
+            return ONE_DAY
 
         if re.match('^/student/v5/term', url):
-            return self._OneWeekCache('sws', url, headers)
+            return ONE_WEEK
 
-        if re.match('^/student/v5/course', url):
-            return self._OneHourCache('sws', url, headers)
-
-        if re.match('^/student/v5/enrollment', url):
-            return self._OneHourCache('sws', url, headers)
-
-        if re.match('^/student/v5/notice', url):
-            return self._OneHourCache('sws', url, headers)
+        if re.match('^/student/v5/course', url) or\
+                re.match('^/student/v5/enrollment', url) or\
+                re.match('^/student/v5/notice', url):
+            return ONE_HOUR
 
         if re.match('^/student/v5/registration', url):
-            return self._FifteenMinCache('sws', url, headers)
+            return FIFTEEN_MINS
 
         # person, AccountBalance
-        return self._FourHourCache('sws', url, headers)
+        return FOUR_HOURS
 
     def processResponse(self, service, url, response):
         return self._process_response(service, url, response)

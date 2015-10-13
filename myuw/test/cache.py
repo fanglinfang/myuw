@@ -1,8 +1,8 @@
 from django.test import TestCase
-from restclients.mock_http import MockHTTP
-from myuw.util.cache_implementation import MyUWCache
-from restclients.models import CacheEntryTimed
 from datetime import timedelta
+from restclients.mock_http import MockHTTP
+from restclients.models import CacheEntryTimed
+from myuw.util.cache_implementation import MyUWCache
 
 
 CACHE = 'myuw.util.cache_implementation.MyUWCache'
@@ -85,11 +85,28 @@ class TestCustomCachePolicy(TestCase):
             ok_response = MockHTTP()
             ok_response.status = 200
             ok_response.data = "xx"
-
-            response = cache.getCache('myplan', '/api/plan/xx', {})
+            url = '/api/plan/xx'
+            response = cache.getCache('myplan', url, {})
             self.assertEquals(response, None)
-            cache.processResponse("myplan", "/api/plan/xx", ok_response)
-            response = cache.getCache('myplan', '/api/plan/xx', {})
+            cache.processResponse("myplan", url, ok_response)
+            response = cache.getCache('myplan', url, {})
+            self.assertEquals(response["response"].data, 'xx')
+
+            cache_entry = CacheEntryTimed.objects.get(service="myplan",
+                                                      url=url)
+            # Cached response is returned within 5 seconds
+            orig_time_saved = cache_entry.time_saved
+            cache_entry.time_saved = orig_time_saved - timedelta(seconds=4)
+            cache_entry.save()
+
+            response = cache.getCache('myplan', url, {})
+            self.assertNotEquals(response, None)
+
+            # Cached response is not returned after 5 seconds
+            cache_entry.time_saved = orig_time_saved - timedelta(seconds=5)
+            cache_entry.save()
+
+            response = cache.getCache('myplan', url, {})
             self.assertEquals(response, None)
 
     def test_default_policies(self):
